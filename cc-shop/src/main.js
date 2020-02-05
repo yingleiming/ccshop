@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import FastClick from "fastclick"
-
+import router from "./router/index"
 
 //1.引用FastClick
 if ('addEventListener' in document) {
@@ -11,8 +11,9 @@ if ('addEventListener' in document) {
 }
 //2.引用全局样式
 import "./style/common.less"
-//3.引入路由
-import router from "./router/index"
+//3.引入ui组件库-Vant Weapp
+import "./plugins/vant"
+
 
 new Vue({
   router,
