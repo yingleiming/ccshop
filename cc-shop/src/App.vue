@@ -1,20 +1,14 @@
 <template>
   <div id="app">
-    <h1>init page</h1>
+    <router-view/>
   </div>
 </template>
 
-<script>
 
 
-export default {
-  name: 'app',
-  components: {
-
+<style lang="less">
+  #app{
+    width: 100%;
+    height: 100%;
   }
-}
-</script>
-
-<style>
-
 </style>
