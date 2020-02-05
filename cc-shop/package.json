@@ -9,6 +9,10 @@
   },
   "dependencies": {
     "core-js": "^3.4.4",
+<<<<<<< HEAD
+=======
+    "fastclick": "^1.0.6",
+>>>>>>> dev
     "vue": "^2.6.10"
   },
   "devDependencies": {
