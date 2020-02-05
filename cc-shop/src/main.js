@@ -10,7 +10,10 @@ if ('addEventListener' in document) {
 }
 //2.引用全局样式
 import "./style/common.less"
+//3.引入路由
+import routes from "./router/index"
 
 new Vue({
+  routes,
   render: h => h(App),
 }).$mount('#app')
