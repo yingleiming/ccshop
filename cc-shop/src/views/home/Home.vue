@@ -1,5 +1,7 @@
 <template>
-    <div id="home"></div>
+    <div id="home">
+        主页
+    </div>
 </template>
 
 <script>

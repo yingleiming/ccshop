@@ -1,5 +1,5 @@
 <template>
-    <div id="cart"></div>
+    <div id="cart">购物车</div>
 </template>
 
 <script>
