@@ -10,9 +10,10 @@
     export default {
         name: "Home",
         created() {
-            console.log("response");
+            //2.请求网络数据
+            console.log("发起请求");
             getHomeData().then((response)=>{
-                console.log("response");
+                console.log(response);
             }).catch(error=>{
                 console.log(error);
             })
