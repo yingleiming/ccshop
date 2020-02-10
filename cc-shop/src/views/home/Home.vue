@@ -7,7 +7,18 @@
 <script>
     export default {
         name: "Home",
+<<<<<<< HEAD
 
+=======
+        created() {
+            //2.请求网络数据
+            getHomeData().then((response)=>{
+                console.log(response);
+            }).catch(error=>{
+                console.log(error);
+            })
+        }
+>>>>>>> dev
     }
 </script>
 
