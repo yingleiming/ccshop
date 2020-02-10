@@ -5,11 +5,9 @@
 </template>
 
 <script>
+    import {getHomeData} from "./../../service/api/index"
     export default {
         name: "Home",
-<<<<<<< HEAD
-
-=======
         created() {
             //2.请求网络数据
             getHomeData().then((response)=>{
@@ -18,7 +16,6 @@
                 console.log(error);
             })
         }
->>>>>>> dev
     }
 </script>
 
