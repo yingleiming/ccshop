@@ -11,7 +11,6 @@
         name: "Home",
         created() {
             //2.请求网络数据
-            console.log("发起请求");
             getHomeData().then((response)=>{
                 console.log(response);
             }).catch(error=>{

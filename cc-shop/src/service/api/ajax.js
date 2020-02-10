@@ -7,8 +7,10 @@ export default function ajax(url="",params={},type="GET") {
 
     //2.返回一个promise
     return new Promise((resolve, reject)=>{
+
         //2.1判断请求的类型
-        if(type.toLowerCase()==="GET"){
+        if(type.toUpperCase()==="GET"){
+            console.log("发起了get请求")
             //2.2拼接字符串
             let paramsStr = "";
             //2.3遍历
@@ -23,7 +25,7 @@ export default function ajax(url="",params={},type="GET") {
             url += "?"+paramsStr;
             //2.6发起get请求
             promise = axios.get(url);
-        }else if(type.toLowerCase()==="POST"){
+        }else if(type.toUpperCase()==="POST"){
             //2.7发起post请求
             promise = axios.post(url,params);
         }
