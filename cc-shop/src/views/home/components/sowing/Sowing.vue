@@ -1,13 +1,10 @@
 <template>
     <swiper id="swiper" :options="swiperOption" ref="mySwiper">
         <!-- slides -->
-        <swiper-slide>I'm Slide 1</swiper-slide>
-        <swiper-slide>I'm Slide 2</swiper-slide>
-        <swiper-slide>I'm Slide 3</swiper-slide>
-        <swiper-slide>I'm Slide 4</swiper-slide>
-        <swiper-slide>I'm Slide 5</swiper-slide>
-        <swiper-slide>I'm Slide 6</swiper-slide>
-        <swiper-slide>I'm Slide 7</swiper-slide>
+        <swiper-slide v-for="sowing in sowing_list" :key="sowing.public_id">
+            <img :src="sowing.icon_url" :alt="sowing.public_name">
+        </swiper-slide>
+
         <!-- Optional controls -->
         <div class="swiper-pagination"  slot="pagination"></div>
     </swiper>
@@ -21,6 +18,9 @@
         components: {
             swiper,
             swiperSlide
+        },
+        props:{
+            sowing_list:Array
         },
         data() {
             return {
@@ -45,7 +45,7 @@
                     //滑动后回调函数
                     on:{
                         slideChangeTransitionEnd(){
-                            console.log(this.activeIndex);
+                            // console.log(this.activeIndex);
                         },
                     }
 
@@ -59,7 +59,11 @@
 <style scoped>
     #swiper{
         width: 100%;
-        height: 150px;
+        height: 14rem;
         background: #ffffff;
+    }
+    #swiper img{
+        width: 100%;
+        height: 100%;
     }
 </style>

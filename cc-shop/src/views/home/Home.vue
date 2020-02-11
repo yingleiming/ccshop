@@ -1,7 +1,7 @@
 <template>
     <div id="home">
         <Header />
-        <Sowing />
+        <Sowing :sowing_list="sowing_list"/>
     </div>
 </template>
 
@@ -17,10 +17,15 @@
             Header,
             Sowing
         },
+        data(){
+            return {
+                sowing_list:[],
+            }
+        },
         created() {
             //2.请求网络数据
             getHomeData().then((response)=>{
-                console.log(response);
+                this.sowing_list = response.data.list[0].icon_list;
             }).catch(error=>{
                 console.log(error);
             })
