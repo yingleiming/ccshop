@@ -9,10 +9,15 @@ if ('addEventListener' in document) {
     FastClick.attach(document.body);
   }, false);
 }
+
 //2.引用全局样式
 import "./style/common.less"
+
 //3.引入ui组件库-Vant Weapp
 import "./plugins/vant"
+
+//4.引入rem
+import "./config/rem.js"
 
 
 new Vue({
