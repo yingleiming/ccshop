@@ -1,18 +1,20 @@
 <template>
     <div id="home">
         <Header />
+        <Sowing />
     </div>
 </template>
 
 <script>
     import {getHomeData} from "./../../service/api/index"
-    //2.引入Header
-    import Header from "./components/Header"
+    //2.引入组件
+    import Header from "./components/header/Header"
+    import Sowing from "./components/sowing/Sowing"
     export default {
         name: "Home",
         components:{//注册组件
             Header,
-
+            Sowing
         },
         created() {
             //2.请求网络数据
