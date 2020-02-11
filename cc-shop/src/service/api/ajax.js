@@ -10,7 +10,6 @@ export default function ajax(url="",params={},type="GET") {
 
         //2.1判断请求的类型
         if(type.toUpperCase()==="GET"){
-            console.log("发起了get请求")
             //2.2拼接字符串
             let paramsStr = "";
             //2.3遍历
