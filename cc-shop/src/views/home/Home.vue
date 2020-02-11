@@ -1,13 +1,19 @@
 <template>
     <div id="home">
-        主页
+        <Header />
     </div>
 </template>
 
 <script>
     import {getHomeData} from "./../../service/api/index"
+    //2.引入Header
+    import Header from "./components/Header"
     export default {
         name: "Home",
+        components:{//注册组件
+            Header,
+
+        },
         created() {
             //2.请求网络数据
             getHomeData().then((response)=>{
