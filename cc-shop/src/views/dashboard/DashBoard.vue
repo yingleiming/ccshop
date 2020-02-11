@@ -61,6 +61,6 @@
         background-color: blue;
     }
     .van-tabbar--fixed{
-        bottom:10rem
+        bottom:1rem
     }
 </style>
