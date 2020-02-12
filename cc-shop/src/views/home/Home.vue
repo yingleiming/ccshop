@@ -1,7 +1,18 @@
 <template>
     <div id="home">
-        <Header />
-        <Sowing :sowing_list="sowing_list"/>
+        <div v-if="!showLoading">
+            <Header />
+            <Sowing :sowing_list="sowing_list"/>
+        </div>
+        <van-loading
+            v-else
+            type="spinner"
+            color="#75a342"
+            size="24px"
+            style="position: absolute;top: 40%;left: 50%;transform: translate(-50%)"
+        >
+            数据加载中...
+        </van-loading>
     </div>
 </template>
 
@@ -19,14 +30,14 @@
         data(){
             return {
                 sowing_list:[],
+                showLoading:true
             }
         },
         created() {
             //2.请求网络数据
             getHomeData().then((response)=>{
                 this.sowing_list = response.data.list[0].icon_list;
-            }).catch(error=>{
-                console.log(error);
+                this.showLoading = false;
             })
         }
     }
@@ -36,6 +47,6 @@
     #home{
         width: 100%;
         height: 100%;
-        background-color: salmon;
+        background-color: transparent;
     }
 </style>

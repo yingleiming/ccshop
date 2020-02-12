@@ -66,4 +66,8 @@
         width: 100%;
         height: 100%;
     }
+    /*穿透修改样式 最高级 一步到位*/
+    #swiper >>> .swiper-pagination-bullet-active{
+        background: #75a342;
+    }
 </style>

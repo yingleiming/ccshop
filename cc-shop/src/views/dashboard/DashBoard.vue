@@ -58,7 +58,7 @@
     #dashboard{
         width: 100%;
         height: 100%;
-        background-color: blue;
+        background-color: transparent;
     }
     .van-tabbar--fixed{
         bottom:1rem
