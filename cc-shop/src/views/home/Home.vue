@@ -14,6 +14,8 @@
         >
             数据加载中...
         </van-loading>
+<!--        秒杀-->
+        <FlashSale :flash_sale_list="flash_sale_list"/>
     </div>
 </template>
 
@@ -23,12 +25,14 @@
     import Header from "./components/header/Header"
     import Sowing from "./components/sowing/Sowing"
     import Nav from "./components/nav/Nav"
+    import FlashSale from "./components/flashSale/FlashSale"
     export default {
         name: "Home",
         components:{//注册组件
             Header,
             Sowing,
-            Nav
+            Nav,
+            FlashSale
         },
         data(){
             return {
@@ -36,6 +40,8 @@
                 sowing_list:[],
                 //导航数据
                 nav_list:[],
+                //秒杀数据
+                flash_sale_list:[],
                 showLoading:true
             }
         },
@@ -44,6 +50,7 @@
             getHomeData().then((response)=>{
                 this.sowing_list = response.data.list[0].icon_list;
                 this.nav_list = response.data.list[2].icon_list;
+                this.flash_sale_list = response.data.list[3].product_list;
                 this.showLoading = false;
             })
         }
@@ -53,7 +60,7 @@
 <style lang="less" scoped>
     #home{
         width: 100%;
-        height: 100%;
+        height: 300rem;
         background-color: transparent;
     }
 </style>
