@@ -2,8 +2,14 @@
     <div id="home">
         <div v-if="!showLoading">
             <Header />
+            <!--轮播图-->
             <Sowing :sowing_list="sowing_list"/>
+            <!--中部导航-->
             <Nav :nav_list="nav_list"/>
+            <!--秒杀-->
+            <FlashSale :flash_sale_list="flash_sale_list"/>
+            <!--猜你喜欢-->
+            <YouLike :you_like_list="you_like_list"/>
         </div>
         <van-loading
             v-else
@@ -14,8 +20,6 @@
         >
             数据加载中...
         </van-loading>
-<!--        秒杀-->
-        <FlashSale :flash_sale_list="flash_sale_list"/>
     </div>
 </template>
 
@@ -26,13 +30,15 @@
     import Sowing from "./components/sowing/Sowing"
     import Nav from "./components/nav/Nav"
     import FlashSale from "./components/flashSale/FlashSale"
+    import YouLike from "./components/youlike/YouLike"
     export default {
         name: "Home",
         components:{//注册组件
             Header,
             Sowing,
             Nav,
-            FlashSale
+            FlashSale,
+            YouLike
         },
         data(){
             return {
@@ -42,6 +48,9 @@
                 nav_list:[],
                 //秒杀数据
                 flash_sale_list:[],
+                //猜你喜欢数据
+                you_like_list:[],
+
                 showLoading:true
             }
         },
@@ -51,6 +60,7 @@
                 this.sowing_list = response.data.list[0].icon_list;
                 this.nav_list = response.data.list[2].icon_list;
                 this.flash_sale_list = response.data.list[3].product_list;
+                this.you_like_list = response.data.list[12].product_list;
                 this.showLoading = false;
             })
         }
