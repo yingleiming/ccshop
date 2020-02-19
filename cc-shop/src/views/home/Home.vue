@@ -10,6 +10,8 @@
             <FlashSale :flash_sale_list="flash_sale_list"/>
             <!--猜你喜欢-->
             <YouLike :you_like_list="you_like_list"/>
+            <!--返回顶部-->
+            <MarkPage />
         </div>
         <van-loading
             v-else
@@ -31,6 +33,7 @@
     import Nav from "./components/nav/Nav"
     import FlashSale from "./components/flashSale/FlashSale"
     import YouLike from "./components/youlike/YouLike"
+    import MarkPage from "./components/markPage/MarkPage"
     export default {
         name: "Home",
         components:{//注册组件
@@ -38,7 +41,8 @@
             Sowing,
             Nav,
             FlashSale,
-            YouLike
+            YouLike,
+            MarkPage
         },
         data(){
             return {
