@@ -35,7 +35,7 @@
     import YouLike from "./components/youlike/YouLike"
     import MarkPage from "./components/markPage/MarkPage"
     //3.引入回到顶部
-    import {showBack} from "../../plugins/global";
+    import {showBack,animate} from "../../plugins/global";
 
     export default {
         name: "Home",
@@ -65,20 +65,38 @@
         },
         created() {
             //2.请求网络数据
-            getHomeData().then((response)=>{
-                this.sowing_list = response.data.list[0].icon_list;
-                this.nav_list = response.data.list[2].icon_list;
-                this.flash_sale_list = response.data.list[3].product_list;
-                this.you_like_list = response.data.list[12].product_list;
-                this.showLoading = false;
-                showBack((status)=>{
-                    this.showBackStatus = status;
-                });
-            })
+            this.reqData();
+            // getHomeData().then((response)=>{
+            //     this.sowing_list = response.data.list[0].icon_list;
+            //     this.nav_list = response.data.list[2].icon_list;
+            //     this.flash_sale_list = response.data.list[3].product_list;
+            //     this.you_like_list = response.data.list[12].product_list;
+            //     this.showLoading = false;
+            //     //开始监听滚动
+            //     showBack((status)=>{
+            //         this.showBackStatus = status;
+            //     });
+            // })
         },
         methods:{
+            async reqData(){
+                 let res = await getHomeData();
+                 if(res.success){
+                     this.sowing_list = res.data.list[0].icon_list;
+                     this.nav_list = res.data.list[2].icon_list;
+                     this.flash_sale_list = res.data.list[3].product_list;
+                     this.you_like_list = res.data.list[12].product_list;
+                     this.showLoading = false;
+                     //开始监听滚动
+                     showBack((status)=>{
+                         this.showBackStatus = status;
+                     });
+                 }
+            },
             scrollToTop(){
-                alert("来了！")
+                //做缓动动画，返回顶部
+                let docB = document.documentElement || document.body;
+                animate(docB,{scrollTop:"0"},400,"ease-out");
             }
         }
     }
