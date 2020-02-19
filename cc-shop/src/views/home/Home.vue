@@ -11,7 +11,7 @@
             <!--猜你喜欢-->
             <YouLike :you_like_list="you_like_list"/>
             <!--返回顶部-->
-            <MarkPage />
+            <MarkPage :scrollToTop="scrollToTop"/>
         </div>
         <van-loading
             v-else
@@ -67,6 +67,11 @@
                 this.you_like_list = response.data.list[12].product_list;
                 this.showLoading = false;
             })
+        },
+        methods:{
+            scrollToTop(){
+                alert("来了！")
+            }
         }
     }
 </script>

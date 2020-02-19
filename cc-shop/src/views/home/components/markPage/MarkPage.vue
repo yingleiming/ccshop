@@ -1,5 +1,5 @@
 <template>
-    <div class="toTopIconWrapper">
+    <div class="toTopIconWrapper" @click="scrollToTop">
         <svg viewBox="0 0 88 88" class="icon toTopIcon">
             <g fill="none" fill-rule="evenodd">
                 <circle cx="44" cy="44" r="43.5" stroke="#CCC" fill="#FFF"></circle>
@@ -12,7 +12,10 @@
 
 <script>
     export default {
-        name: "MarkPage"
+        name: "MarkPage",
+        props:{
+            scrollToTop:Function
+        }
     }
 </script>
 
