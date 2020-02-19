@@ -11,7 +11,7 @@
             <!--猜你喜欢-->
             <YouLike :you_like_list="you_like_list"/>
             <!--返回顶部-->
-            <MarkPage :scrollToTop="scrollToTop"/>
+            <MarkPage v-if="showBackStatus" :scrollToTop="scrollToTop"/>
         </div>
         <van-loading
             v-else
@@ -34,6 +34,9 @@
     import FlashSale from "./components/flashSale/FlashSale"
     import YouLike from "./components/youlike/YouLike"
     import MarkPage from "./components/markPage/MarkPage"
+    //3.引入回到顶部
+    import {showBack} from "../../plugins/global";
+
     export default {
         name: "Home",
         components:{//注册组件
@@ -54,8 +57,10 @@
                 flash_sale_list:[],
                 //猜你喜欢数据
                 you_like_list:[],
-
-                showLoading:true
+                //是否显示加载图标
+                showLoading:true,
+                //是否显示返回顶部的按钮
+                showBackStatus:false
             }
         },
         created() {
@@ -66,6 +71,9 @@
                 this.flash_sale_list = response.data.list[3].product_list;
                 this.you_like_list = response.data.list[12].product_list;
                 this.showLoading = false;
+                showBack((status)=>{
+                    this.showBackStatus = status;
+                });
             })
         },
         methods:{
