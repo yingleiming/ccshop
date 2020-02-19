@@ -19,6 +19,9 @@ import "./plugins/vant"
 //4.引入rem
 import "./config/rem.js"
 
+//5.引入过滤器
+import "./config/filters"
+
 
 new Vue({
   router,
