@@ -83,13 +83,22 @@
     //1.引入组件
     import Header from "./compontents/Header"
     //2.引入滚动组件
-    // import BScroll from 'better-scroll'
+    import BScroll from 'better-scroll'
+    //3.引入接口
+    import {getCategories,getCategoriesDetail} from "./../../service/api/index"
+
     export default {
         name: "Category",
         data(){
             return{
                 //是否显示加载图标
                 showLoading:false,
+                // 左边列表数据
+                categoriesData:[],
+                // 右边列表数据
+                categoriesDetailData:[],
+
+
             }
         },
         components:{
