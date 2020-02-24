@@ -83,7 +83,7 @@
     //1.引入组件
     import Header from "./compontents/Header"
     //2.引入滚动组件
-    import BScroll from 'better-scroll'
+    // import BScroll from 'better-scroll'
     export default {
         name: "Category",
         data(){
@@ -94,6 +94,16 @@
         },
         components:{
             Header
+        },
+        created() {
+            // 一般在created钩子选项中请求数据
+            this.initData();
+        },
+        methods:{
+            // 一般在methods里面写方法
+            initData(){
+
+            }
         }
     }
 </script>

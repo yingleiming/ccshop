@@ -27,3 +27,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### 滚动插件 better-scroll 
+[https://ustbhuangyi.github.io/better-scroll/doc/zh-hans]()
+
