@@ -7,62 +7,15 @@
             <!--左边-->
             <div class="leftWrapper">
                 <ul class="wrapper">
-                    <li class="categoryItem selected">
-                        <span class="textWrapper">推荐</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">安心蔬菜</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">豆制品</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">新鲜水果</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">肉禽蛋</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">海鲜水产</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">乳品烘焙</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">营养早餐</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">叮咚心选</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">米面粮油</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">调味品</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">方便速食</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">冰淇淋</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">酒水饮料</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">休闲零食</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">快手菜</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">南北干货</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">宝宝餐</span>
-                    </li>
-                    <li class="categoryItem">
-                        <span class="textWrapper">厨房用品</span>
+                    <li
+                        class="categoryItem"
+                        v-for="(cate,index) in categoriesData"
+                        :key="cate.id"
+                        :class="{selected:currentIndex===index}"
+                        @click="clickLeftLi(index)"
+                        ref="menuList"
+                    >
+                        <span class="textWrapper">{{cate.name}}</span>
                     </li>
                 </ul>
             </div>
@@ -97,6 +50,8 @@
                 categoriesData:[],
                 // 右边列表数据
                 categoriesDetailData:[],
+                // 左边是否被选中
+                currentIndex:0
             }
         },
         components:{
@@ -107,7 +62,7 @@
             this.initData();
         },
         methods:{
-            // 一般在methods里面写方法
+            // 1.初始化操作（数据和界面）一般在methods里面写方法
             async initData() {
                 //1.获取左边的数据
                 let leftRes = await getCategories();
@@ -127,8 +82,22 @@
                 this.$nextTick(()=>{
                     this.leftScroll = new BScroll(".leftWrapper",{probeType:3});
                 });
-
-
+            },
+            // 2.处理左边的点击
+            async clickLeftLi(index){
+                //2.1改变索引
+                this.currentIndex = index;
+                //2.2滚动到对应的位置
+                let menuList = this.$refs.menuList;
+                let el = menuList[index];
+                // window.console.log(el);
+                //2.3滚动到对应的位置
+                this.leftScroll.scrollToElement(el,300);
+                //2.4获取右边的数据
+                let rightRes = await getCategoriesDetail(`/lk00${index + 1}`);
+                if(rightRes.success){
+                    this.categoriesDetailData = rightRes.data.cate;
+                }
             }
         }
     }
