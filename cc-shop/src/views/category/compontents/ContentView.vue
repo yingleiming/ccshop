@@ -1,5 +1,8 @@
 <template>
-    <div class="wrapper emptyWrapper">
+    <div class="wrapper emptyWrapper"
+         v-for="(categoriesDetail,index) in categoriesDetailData"
+         :key="categoriesDetail.id"
+    >
         <div class="categoryTitle" style="top: 0">推荐</div>
         <ProductItem />
     </div>
@@ -9,6 +12,9 @@
     import ProductItem from "./ProductItem"
     export default {
         name: "ContentView",
+        props:{
+            categoriesDetailData:Array
+        },
         components:{
             ProductItem
         }

@@ -53,7 +53,18 @@
 
 <script>
     export default {
-        name: "ProductItem"
+        name: "ProductItem",
+        props:{
+            products:Array
+        },
+        data(){
+            return{
+                categoriesDetailData:[]
+            }
+        },
+        computed:{
+
+        }
     }
 </script>
 

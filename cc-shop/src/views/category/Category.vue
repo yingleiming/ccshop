@@ -20,7 +20,7 @@
                 </ul>
             </div>
             <!--右边-->
-            <ContentView />
+            <ContentView :categoriesDetailData="categoriesDetailData"/>
         </div>
         <van-loading
                 v-else
@@ -101,7 +101,9 @@
                 let rightRes = await getCategoriesDetail(`/lk00${index + 1}`);
                 if(rightRes.success){
                     this.categoriesDetailData = rightRes.data.cate;
+
                 }
+                window.console.log(this.rightRes);
             }
         }
     }
