@@ -92,13 +92,11 @@
         data(){
             return{
                 //是否显示加载图标
-                showLoading:false,
+                showLoading:true,
                 // 左边列表数据
                 categoriesData:[],
                 // 右边列表数据
                 categoriesDetailData:[],
-
-
             }
         },
         components:{
@@ -110,7 +108,26 @@
         },
         methods:{
             // 一般在methods里面写方法
-            initData(){
+            async initData() {
+                //1.获取左边的数据
+                let leftRes = await getCategories();
+                if(leftRes.success){
+                    this.categoriesData = leftRes.data.cate;
+                }
+                //2.获取右边的数据
+                let rightRes = await getCategoriesDetail("/lk001");
+                if(rightRes.success){
+                    this.categoriesDetailData = rightRes.data.cate;
+                }
+
+                //3.隐藏loading框
+               this.showLoading = false;
+
+                //4.初始化滚动框架
+                this.$nextTick(()=>{
+                    this.leftScroll = new BScroll(".leftWrapper",{probeType:3});
+                });
+
 
             }
         }
