@@ -19,6 +19,8 @@
                     </li>
                 </ul>
             </div>
+            <!--右边-->
+            <ContentView />
         </div>
         <van-loading
                 v-else
@@ -35,6 +37,7 @@
 <script>
     //1.引入组件
     import Header from "./compontents/Header"
+    import ContentView from "./compontents/ContentView"
     //2.引入滚动组件
     import BScroll from 'better-scroll'
     //3.引入接口
@@ -55,7 +58,8 @@
             }
         },
         components:{
-            Header
+            Header,
+            ContentView
         },
         created() {
             // 一般在created钩子选项中请求数据
