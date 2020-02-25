@@ -110,31 +110,26 @@
         background-color: #F5F5F5;
         overflow: hidden;
     }
-    .leftWrapper{
+
+    .listWrapper {
         display: flex;
         position: absolute;
         top: 2.75rem;
-        bottom: 4rem;
-    }
-    .wrapper {
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        overflow-scrolling: touch;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        top: 0;
-        width: 5.3125rem;
-        background: #F4F4F4;
+        bottom: 3rem;
+        width: 100%;
+        overflow: hidden;
     }
 
-    .wrapper::-webkit-scrollbar {
-        display: none;
+    .leftWrapper{
+        background-color: #F4F4F4;
+        width: 5.3125rem;
+        flex: 0 0 5.3125rem;
     }
 
     .categoryItem {
         padding: 0.75rem 0;
         border-bottom: solid 1px #E8E9E8;
+        position: relative;
     }
 
     .categoryItem .textWrapper {
