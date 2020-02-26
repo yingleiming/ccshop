@@ -1,18 +1,17 @@
 <template>
-    <div>
-        <div class="wrapper emptyWrapper"
-             v-for="(categoriesDetail,index) in categoriesDetailData"
+    <div  class="wrapper emptyWrapper">
+        <div
+             v-for="categoriesDetail in categoriesDetailData"
              :key="categoriesDetail.id"
         >
             <div class="categoryTitle">{{categoriesDetail.name}}</div>
-            <ProductItem :products="products"/>
+            <ProductItem :products="categoriesDetail.products"/>
         </div>
     </div>
 
 </template>
 
 <script>
-    /* eslint-disable */
     import ProductItem from "./ProductItem"
     export default {
         name: "ContentView",
@@ -21,7 +20,19 @@
         },
         components:{
             ProductItem
-        }
+        },
+        data(){
+            return{
+                products:[]
+            }
+        },
+        created(){
+            console.log(this.products)
+        },
+        methods:{
+
+        },
+
     }
 </script>
 
