@@ -35,6 +35,7 @@
 </template>
 
 <script>
+    /* eslint-disable */
     //1.引入组件
     import Header from "./compontents/Header"
     import ContentView from "./compontents/ContentView"
@@ -77,6 +78,7 @@
                 let rightRes = await getCategoriesDetail("/lk001");
                 if(rightRes.success){
                     this.categoriesDetailData = rightRes.data.cate;
+                    console.log(this.categoriesDetailData);
                 }
 
                 //3.隐藏loading框
@@ -101,9 +103,9 @@
                 let rightRes = await getCategoriesDetail(`/lk00${index + 1}`);
                 if(rightRes.success){
                     this.categoriesDetailData = rightRes.data.cate;
-
+                    // console.log(this.categoriesDetailData);
                 }
-                window.console.log(this.rightRes);
+
             }
         }
     }

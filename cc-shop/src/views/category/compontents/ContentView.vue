@@ -1,14 +1,18 @@
 <template>
-    <div class="wrapper emptyWrapper"
-         v-for="(categoriesDetail,index) in categoriesDetailData"
-         :key="categoriesDetail.id"
-    >
-        <div class="categoryTitle" style="top: 0">推荐</div>
-        <ProductItem />
+    <div>
+        <div class="wrapper emptyWrapper"
+             v-for="(categoriesDetail,index) in categoriesDetailData"
+             :key="categoriesDetail.id"
+        >
+            <div class="categoryTitle">{{categoriesDetail.name}}</div>
+            <ProductItem :products="products"/>
+        </div>
     </div>
+
 </template>
 
 <script>
+    /* eslint-disable */
     import ProductItem from "./ProductItem"
     export default {
         name: "ContentView",
