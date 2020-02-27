@@ -13,7 +13,7 @@
                             <a href="javascript:;" class="cartCheckBox" checked></a>
                         </div>
                         <div class="center">
-                            <img src="images/detail1.jpg" alt="">
+                            <img src="./images/detail1.jpg" alt="">
                         </div>
                         <div class="right">
                             <a href="#">玥明子2017春秋新款韩版加肥加大码女装胖MM胖妹妹秋装胖人显瘦毛衣外套中长款打底连衣裙女 黑色 XXXL 150-168斤左右</a>
@@ -32,7 +32,7 @@
                             <a href="javascript:;" class="cartCheckBox" checked></a>
                         </div>
                         <div class="center">
-                            <img src="images/detail1.jpg" alt="">
+                            <img src="./images/detail1.jpg" alt="">
                         </div>
                         <div class="right">
                             <a href="#">玥明子2017春秋新款韩版加肥加大码女装胖MM胖妹妹秋装胖人显瘦毛衣外套中长款打底连衣裙女 黑色 XXXL 150-168斤左右</a>
@@ -51,66 +51,7 @@
                             <a href="javascript:;" class="cartCheckBox" checked></a>
                         </div>
                         <div class="center">
-                            <img src="images/detail1.jpg" alt="">
-                        </div>
-                        <div class="right">
-                            <a href="#">玥明子2017春秋新款韩版加肥加大码女装胖MM胖妹妹秋装胖人显瘦毛衣外套中长款打底连衣裙女 黑色 XXXL 150-168斤左右</a>
-                            <div class="bottomContent">
-                                <p class="shopPrice">&yen;999.00</p>
-                                <div class="shopDeal">
-                                    <span>-</span>
-                                    <input disabled type="number" value="1">
-                                    <span>+</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <div class="shopCartListCon">
-                        <div class="left">
-                            <a href="javascript:;" class="cartCheckBox" checked></a>
-                        </div>
-                        <div class="center">
-                            <img src="images/detail1.jpg" alt="">
-                        </div>
-                        <div class="right">
-                            <a href="#">玥明子2017春秋新款韩版加肥加大码女装胖MM胖妹妹秋装胖人显瘦毛衣外套中长款打底连衣裙女 黑色 XXXL 150-168斤左右</a>
-                            <div class="bottomContent">
-                                <p class="shopPrice">&yen;999.00</p>
-                                <div class="shopDeal">
-                                    <span>-</span>
-                                    <input disabled type="number" value="1">
-                                    <span>+</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="shopCartListCon">
-                        <div class="left">
-                            <a href="javascript:;" class="cartCheckBox" checked></a>
-                        </div>
-                        <div class="center">
-                            <img src="images/detail1.jpg" alt="">
-                        </div>
-                        <div class="right">
-                            <a href="#">玥明子2017春秋新款韩版加肥加大码女装胖MM胖妹妹秋装胖人显瘦毛衣外套中长款打底连衣裙女 黑色 XXXL 150-168斤左右</a>
-                            <div class="bottomContent">
-                                <p class="shopPrice">&yen;999.00</p>
-                                <div class="shopDeal">
-                                    <span>-</span>
-                                    <input disabled type="number" value="1">
-                                    <span>+</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="shopCartListCon">
-                        <div class="left">
-                            <a href="javascript:;" class="cartCheckBox" checked></a>
-                        </div>
-                        <div class="center">
-                            <img src="images/detail1.jpg" alt="">
+                            <img src="./images/detail1.jpg" alt="">
                         </div>
                         <div class="right">
                             <a href="#">玥明子2017春秋新款韩版加肥加大码女装胖MM胖妹妹秋装胖人显瘦毛衣外套中长款打底连衣裙女 黑色 XXXL 150-168斤左右</a>
@@ -131,7 +72,7 @@
                             <a href="javascript:;" class="cartCheckBox" checked></a>
                         </div>
                         <div class="center">
-                            <img src="images/detail1.jpg" alt="">
+                            <img src="./images/detail1.jpg" alt="">
                         </div>
                         <div class="right">
                             <a href="#">玥明子2017春秋新款韩版加肥加大码女装胖MM胖妹妹秋装胖人显瘦毛衣外套中长款打底连衣裙女 黑色 XXXL 150-168斤左右</a>
@@ -150,7 +91,7 @@
                             <a href="javascript:;" class="cartCheckBox" checked></a>
                         </div>
                         <div class="center">
-                            <img src="images/detail1.jpg" alt="">
+                            <img src="./images/detail1.jpg" alt="">
                         </div>
                         <div class="right">
                             <a href="#">玥明子2017春秋新款韩版加肥加大码女装胖MM胖妹妹秋装胖人显瘦毛衣外套中长款打底连衣裙女 黑色 XXXL 150-168斤左右</a>
@@ -169,7 +110,66 @@
                             <a href="javascript:;" class="cartCheckBox" checked></a>
                         </div>
                         <div class="center">
-                            <img src="images/detail1.jpg" alt="">
+                            <img src="./images/detail1.jpg" alt="">
+                        </div>
+                        <div class="right">
+                            <a href="#">玥明子2017春秋新款韩版加肥加大码女装胖MM胖妹妹秋装胖人显瘦毛衣外套中长款打底连衣裙女 黑色 XXXL 150-168斤左右</a>
+                            <div class="bottomContent">
+                                <p class="shopPrice">&yen;999.00</p>
+                                <div class="shopDeal">
+                                    <span>-</span>
+                                    <input disabled type="number" value="1">
+                                    <span>+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="shopCartListCon">
+                        <div class="left">
+                            <a href="javascript:;" class="cartCheckBox" checked></a>
+                        </div>
+                        <div class="center">
+                            <img src="./images/detail1.jpg" alt="">
+                        </div>
+                        <div class="right">
+                            <a href="#">玥明子2017春秋新款韩版加肥加大码女装胖MM胖妹妹秋装胖人显瘦毛衣外套中长款打底连衣裙女 黑色 XXXL 150-168斤左右</a>
+                            <div class="bottomContent">
+                                <p class="shopPrice">&yen;999.00</p>
+                                <div class="shopDeal">
+                                    <span>-</span>
+                                    <input disabled type="number" value="1">
+                                    <span>+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shopCartListCon">
+                        <div class="left">
+                            <a href="javascript:;" class="cartCheckBox" checked></a>
+                        </div>
+                        <div class="center">
+                            <img src="./images/detail1.jpg" alt="">
+                        </div>
+                        <div class="right">
+                            <a href="#">玥明子2017春秋新款韩版加肥加大码女装胖MM胖妹妹秋装胖人显瘦毛衣外套中长款打底连衣裙女 黑色 XXXL 150-168斤左右</a>
+                            <div class="bottomContent">
+                                <p class="shopPrice">&yen;999.00</p>
+                                <div class="shopDeal">
+                                    <span>-</span>
+                                    <input disabled type="number" value="1">
+                                    <span>+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shopCartListCon">
+                        <div class="left">
+                            <a href="javascript:;" class="cartCheckBox" checked></a>
+                        </div>
+                        <div class="center">
+                            <img src="./images/detail1.jpg" alt="">
                         </div>
                         <div class="right">
                             <a href="#">玥明子2017春秋新款韩版加肥加大码女装胖MM胖妹妹秋装胖人显瘦毛衣外套中长款打底连衣裙女 黑色 XXXL 150-168斤左右</a>
@@ -208,7 +208,7 @@
     }
 </script>
 
-<style>
+<style lang="less" scoped>
     #cart{
         width: 100%;
         height: 100%;
@@ -245,7 +245,7 @@
     }
 
     .cartCheckBox{
-        background: url("images/shop-icon.png ") no-repeat;
+        background: url("./images/shop-icon.png") no-repeat;
         -webkit-background-size: 2.5rem 5rem;
         background-size: 2.5rem 5rem;
         width: 1rem;
