@@ -22,7 +22,7 @@
                 </div>
                 <div class="priceWrapper">
                     <div class="price">
-                        <span class="f34">{{product.price}}</span>{{product.origin_price}}
+                        <span class="f34">{{product.price | moneyFormat}}</span>
                     </div>
                     <div class="iconCartWrapper">
                         <svg viewBox="0 0 52 52" class="icon iconCart">

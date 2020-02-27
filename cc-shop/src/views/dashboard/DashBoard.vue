@@ -47,14 +47,24 @@
         name: "DashBoard",
         data() {
             return {
-                active: 0,
+                active: Number(sessionStorage.getItem("tabBarActiveIndex")) || 0,
                 icon: {
                     active: 'https://img.yzcdn.cn/vant/user-active.png',
                     inactive: 'https://img.yzcdn.cn/vant/user-inactive.png'
                 }
             }
+        },
+        // 监视
+        watch:{
+            active(value){
+                this.active = value;
+                let tabBarActiveIndex = value>0 ? value: 0;
+                sessionStorage.setItem("tabBarActiveIndex",tabBarActiveIndex);
+
+            }
         }
     }
+
 </script>
 
 <style lang="less" scoped>

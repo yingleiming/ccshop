@@ -78,7 +78,7 @@
                 let rightRes = await getCategoriesDetail("/lk001");
                 if(rightRes.success){
                     this.categoriesDetailData = rightRes.data.cate;
-                    console.log(this.categoriesDetailData);
+                    // console.log(this.categoriesDetailData);
                 }
 
                 //3.隐藏loading框
