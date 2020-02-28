@@ -3,6 +3,7 @@
         <!--头部区域-->
         <header class="titleWrapper">
             <h4><strong>购物车</strong></h4>
+            <button class="clearCart">清空购物车</button>
         </header>
         <div class="contentWrapper">
             <!--中间内容-->
@@ -231,6 +232,15 @@
         align-items: center;
     }
 
+    .titleWrapper .clearCart{
+        background-color: transparent;
+        font-size: 0.8rem;
+        color:red;
+        position: absolute;
+        right: 0.3rem;
+        outline: none;
+        border: 0;
+    }
     .contentWrapper{
         padding-top: 3.5rem;
     }
@@ -336,6 +346,8 @@
         text-align: center;
         margin: 0 0.2rem;
         font-size: 0.8rem;
+        border: 0;
+        outline: none;
     }
 
     /*底部通栏*/
