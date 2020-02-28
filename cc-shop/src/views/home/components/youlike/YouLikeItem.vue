@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="iconCartWrapper">
-                        <svg viewBox="0 0 52 52" class="icon iconCart">
+                        <svg viewBox="0 0 52 52" @click="addToCart(product)" class="icon iconCart">
                             <defs>
                                 <radialGradient cx="27.0288363%" cy="10.3693483%" fx="27.0288363%" fy="10.3693483%" r="93.8427229%" id="radialGradient-1">
                                     <stop stop-color="#4ECA75" offset="0%"></stop><stop stop-color="#39B460" offset="100%"></stop>
@@ -49,10 +49,17 @@
 </template>
 
 <script>
+    import PubSub from "pubsub-js"
     export default {
         name: "YouLikeItem",
         props:{
             product:Object
+        },
+        methods:{
+            addToCart(goods){//在此组件中进行发送，在Home组件中进行接收
+                PubSub.publish("homeAddToCart",goods);
+
+            }
         }
     }
 </script>

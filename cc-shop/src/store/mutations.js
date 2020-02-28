@@ -16,7 +16,8 @@ export default {
                 "id":goodsId,
                 "name":goodsName,
                 "small_image":smallImage,
-                "price":goodsPrice
+                "price":goodsPrice,
+                "checked":true
             }
         }
 

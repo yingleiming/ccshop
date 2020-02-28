@@ -36,7 +36,11 @@
     import MarkPage from "./components/markPage/MarkPage"
     //3.引入回到顶部
     import {showBack,animate} from "../../plugins/global";
-
+    //4.引入消息订阅组件
+    import PubSub from "pubsub-js"
+    import { Toast } from 'vant';
+    //5.引入vuex
+    import {mapMutations} from "vuex"
     export default {
         name: "Home",
         components:{//注册组件
@@ -66,19 +70,29 @@
         created() {
             //2.请求网络数据
             this.reqData();
-            // getHomeData().then((response)=>{
-            //     this.sowing_list = response.data.list[0].icon_list;
-            //     this.nav_list = response.data.list[2].icon_list;
-            //     this.flash_sale_list = response.data.list[3].product_list;
-            //     this.you_like_list = response.data.list[12].product_list;
-            //     this.showLoading = false;
-            //     //开始监听滚动
-            //     showBack((status)=>{
-            //         this.showBackStatus = status;
-            //     });
-            // })
+
+        },
+        mounted(){
+            //订阅消息（添加到购物车的消息）
+            PubSub.subscribe(("homeAddToCart"),(msg,goods)=>{
+                if(msg==="homeAddToCart"){
+                    this.ADD_GOODS({
+                        //追加
+                        goodsId:goods.id,
+                        goodsName:goods.name,
+                        smallImage:goods.small_image,
+                        goodsPrice:goods.price
+                    });
+                }
+                Toast({
+                    message:"添加购物车成功！",
+                    duration:800
+                });
+            })
+
         },
         methods:{
+            ...mapMutations(["ADD_GOODS"]),//调用ADD_GOODS方法
             async reqData(){
                  let res = await getHomeData();
                  if(res.success){
