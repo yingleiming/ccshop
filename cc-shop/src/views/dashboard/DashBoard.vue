@@ -74,6 +74,6 @@
         background-color: transparent;
     }
     .van-tabbar--fixed{
-        bottom:1rem
+        /*bottom:1rem*/
     }
 </style>

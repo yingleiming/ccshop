@@ -354,7 +354,7 @@
     .tabBar{
         position: fixed;
         left:0;
-        bottom:2.7rem;
+        bottom:3rem;
         width:100%;
         height: 2.5rem;
         background-color: #fff;

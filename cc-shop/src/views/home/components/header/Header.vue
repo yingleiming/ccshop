@@ -133,19 +133,19 @@
 
     @media (min-width: 320px) {
         .searchWrapper {
-            width: 55%;
+            width: 50%;
         }
     }
 
     @media (min-width: 375px) {
         .searchWrapper {
-            width: 57%;
+            width: 50%;
         }
     }
 
     @media (min-width: 414px) {
         .searchWrapper {
-            width: 62%;
+            width: 50%;
         }
     }
 
