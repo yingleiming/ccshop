@@ -163,7 +163,7 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
                 iSpeed = (target[attr] - speedBase) / intervalTime;
                 iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
             }
-            //判断是否达步长之内的误差距离，如果到达说明到达目标点
+            //判断是否到达步长之内的误差距离，如果到达说明到达目标点
             switch(mode){
                 case 'ease-out':
                     status = iCurrent !== target[attr];
@@ -204,6 +204,29 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
 };
 
 
+/*
+* 本地化存储
+* */
+export const setStore =(name,content)=>{
+    if(!name) return;
+    if (typeof content !== "string"){
+        content = JSON.stringify(content);
+    }
+    window.localStorage.setItem(name,content);
+};
 
+/*
+* 本地化获取
+* */
+export const getStore =(name)=>{
+    if(!name) return;
+    return window.localStorage.getItem(name);
+};
 
-
+/*
+* 本地化删除
+* */
+export const removeStore =(name)=>{
+    if(!name) return;
+    return window.localStorage.removeItem(name);
+};
