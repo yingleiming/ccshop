@@ -204,8 +204,13 @@
 </template>
 
 <script>
+    import {mapState} from "vuex"
     export default {
-        name: "Cart"
+        name: "Cart",
+        computed:{//计算属性，实时计算监测
+            //取数据
+            ...mapState(["shopCart"])
+        }
     }
 </script>
 

@@ -17,7 +17,7 @@
                         :src="props.active ? icon.active : icon.inactive"
                 >
             </van-tabbar-item>
-            <van-tabbar-item replace to="/dashboard/cart">
+            <van-tabbar-item replace to="/dashboard/cart" info="10">
                 <span>购物车</span>
                 <img
                         slot="icon"
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+    import {mapState,mapMutations} from "vuex"
     export default {
         name: "DashBoard",
         data() {
@@ -62,6 +63,26 @@
                 sessionStorage.setItem("tabBarActiveIndex",tabBarActiveIndex);
 
             }
+        },
+        //计算属性----从vuex中获取的所有数据都放到computed里面
+        computed:{
+            //取数据
+            ...mapState(["shopCart"]),
+            goodsNum(){
+                if(this.shopCart){
+
+                }else {
+                    return 0;
+                }
+            }
+        },
+        mounted(){//此钩子，是页面初始化完毕后调用
+            //1.获取购物车的数据
+            this.INIT_SHOP_CART();
+
+        },
+        methods:{
+            ...mapMutations(["INIT_SHOP_CART"])
         }
     }
 
