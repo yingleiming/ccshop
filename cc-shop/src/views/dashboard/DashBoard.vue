@@ -17,7 +17,7 @@
                         :src="props.active ? icon.active : icon.inactive"
                 >
             </van-tabbar-item>
-            <van-tabbar-item replace to="/dashboard/cart" info="10">
+            <van-tabbar-item replace to="/dashboard/cart" :info="goodsNum>0?goodsNum:''">
                 <span>购物车</span>
                 <img
                         slot="icon"
@@ -55,6 +55,9 @@
                 }
             }
         },
+        methods:{
+            ...mapMutations(["INIT_SHOP_CART"])
+        },
         // 监视
         watch:{
             active(value){
@@ -70,7 +73,13 @@
             ...mapState(["shopCart"]),
             goodsNum(){
                 if(this.shopCart){
-
+                    //总的购物车商品数量
+                    let num = 0;
+                    // console.log(Object.values(this.shopCart));
+                    Object.values(this.shopCart).forEach((goods,index)=>{
+                        num += goods.num;
+                    });
+                    return num;
                 }else {
                     return 0;
                 }
@@ -81,9 +90,7 @@
             this.INIT_SHOP_CART();
 
         },
-        methods:{
-            ...mapMutations(["INIT_SHOP_CART"])
-        }
+
     }
 
 </script>
