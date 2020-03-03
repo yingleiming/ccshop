@@ -35,7 +35,7 @@
     import YouLike from "./components/youlike/YouLike"
     import MarkPage from "./components/markPage/MarkPage"
     //3.引入回到顶部
-    import {showBack,animate} from "../../plugins/global";
+    import {showBack,animate} from "../../config/global";
     //4.引入消息订阅组件
     import PubSub from "pubsub-js"
     import { Toast } from 'vant';
