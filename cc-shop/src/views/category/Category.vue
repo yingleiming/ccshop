@@ -43,6 +43,10 @@
     import BScroll from 'better-scroll'
     //3.引入接口
     import {getCategories,getCategoriesDetail} from "./../../service/api/index"
+    //4.引入消息订阅组件
+    import PubSub from "pubsub-js"
+    import { Toast } from 'vant';
+    //5.引入vuex
 
     export default {
         name: "Category",
@@ -65,6 +69,25 @@
         created() {
             // 一般在created钩子选项中请求数据
             this.initData();
+        },
+        mounted(){
+            //订阅消息（添加到购物车的消息）
+            PubSub.subscribe(("categoryAddToCart"),(msg,goods)=>{
+                if(msg==="categoryAddToCart"){
+                    this.ADD_GOODS=({
+                        //追加
+                        goodsId:goods.id,
+                        goodsName:goods.name,
+                        smallImage:goods.small_image,
+                        goodsPrice:goods.price
+                    });
+                }
+                Toast({
+                    message:"添加购物车成功！",
+                    duration:800
+                });
+            })
+
         },
         methods:{
             // 1.初始化操作（数据和界面）一般在methods里面写方法

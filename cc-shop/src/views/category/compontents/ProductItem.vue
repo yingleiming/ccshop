@@ -24,7 +24,7 @@
                     <div class="price">
                         <span class="f34">{{product.price | moneyFormat}}</span>
                     </div>
-                    <div class="iconCartWrapper">
+                    <div class="iconCartWrapper" @click="addToCard(product)">
                         <svg viewBox="0 0 52 52" class="icon iconCart">
                             <defs>
                                 <radialGradient cx="27.0288363%" cy="10.3693483%" fx="27.0288363%"
@@ -57,6 +57,8 @@
 </template>
 
 <script>
+    // 广播
+    import PubSub from "pubsub-js"
     export default {
         name: "ProductItem",
         props:{
@@ -67,6 +69,12 @@
 
             }
         },
+        methods:{
+            addToCard(goods){
+                //发布,通过categoryAddToCart进行接收，把goods抛出去
+                PubSub.publish("categoryAddToCart",goods);
+            }
+        }
 
     }
 </script>

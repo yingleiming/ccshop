@@ -9,7 +9,7 @@
                 <div class="originPrice">{{product.origin_price | moneyFormat}}</div>
                 <div class="priceWrapper">
                     <div class="price">{{product.price | moneyFormat}}</div>
-                    <div class="iconCartWrapper">
+                    <div class="iconCartWrapper" @click="addToCard(product)">
                         <svg viewBox="0 0 52 52" class="icon icon-60">
                             <defs>
                                 <radialGradient cx="27.0288363%" cy="10.3693483%" fx="27.0288363%" fy="10.3693483%" r="93.8427229%" id="radialGradient-1"><stop stop-color="#4ECA75" offset="0%"></stop><stop stop-color="#39B460" offset="100%"></stop></radialGradient>
@@ -32,10 +32,19 @@
 </template>
 
 <script>
+    // 广播
+    import PubSub from "pubsub-js"
+
     export default {
         name: "FlashSaleItem",
         props:{
             product:Object
+        },
+        methods:{
+            addToCard(goods){
+                //发布,通过homeAddToCart进行接收，把goods抛出去
+                PubSub.publish("homeAddToCart",goods);
+            }
         }
     }
 </script>
