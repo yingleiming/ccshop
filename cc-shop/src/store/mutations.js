@@ -36,5 +36,30 @@ export default {
         if(initCart){
             state.shopCart = JSON.parse(initCart);
         }
+    },
+
+    //3.把商品移除购物车
+    [REDUCE_CART](state,{goodsId}){
+        //拿到购物车中的所有商品
+        let shopCart = state.shopCart;
+        //拿到单个商品
+        let goods = shopCart[goodsId];
+        if(goods){//找到该商品
+            if(goods["num"]>0){
+                goods["num"]--;
+                //3.1判断是否为0个
+                if(goods["num"]===0){
+                    delete shopCart[goodsId];
+                }
+            }else {
+                goods = null;
+            }
+            //3.2同步数据
+            state.shopCart = {...shopCart};
+            setStore("shopCart0", state.shopCart)
+
+        }
     }
+
+
 }
