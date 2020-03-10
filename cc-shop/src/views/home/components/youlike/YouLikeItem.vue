@@ -26,8 +26,8 @@
                             <div class="originPrice"> {{product.origin_price | moneyFormat}}</div>
                         </div>
                     </div>
-                    <div class="iconCartWrapper">
-                        <svg viewBox="0 0 52 52" @click="addToCart(product)" class="icon iconCart">
+                    <div class="iconCartWrapper" @click="addToCart(product)">
+                        <svg viewBox="0 0 52 52"  class="icon iconCart">
                             <defs>
                                 <radialGradient cx="27.0288363%" cy="10.3693483%" fx="27.0288363%" fy="10.3693483%" r="93.8427229%" id="radialGradient-1">
                                     <stop stop-color="#4ECA75" offset="0%"></stop><stop stop-color="#39B460" offset="100%"></stop>
