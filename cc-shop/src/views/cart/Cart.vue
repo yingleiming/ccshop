@@ -14,7 +14,9 @@
                             <a
                                 href="javascript:;"
                                 class="cartCheckBox"
-                                :checked="goods.checked">
+                                :checked="goods.checked"
+                                @click.stop="singleGoodsSelected(goods.id)"
+                            >
                             </a>
                         </div>
                         <div class="center">
@@ -25,9 +27,9 @@
                             <div class="bottomContent">
                                 <p class="shopPrice">{{goods.price | moneyFormat}}</p>
                                 <div class="shopDeal">
-                                    <span>-</span>
+                                    <span @click="removeOutCart(goods.id,goods.num)">-</span>
                                     <input disabled type="number" v-model="goods.num">
-                                    <span>+</span>
+                                    <span @click="addToCart(goods.id,goods.name,goods.small_image,goods.price)">+</span>
                                 </div>
                             </div>
                         </div>
@@ -52,12 +54,45 @@
 </template>
 
 <script>
-    import {mapState} from "vuex"
+    import {mapState,mapMutations} from "vuex";
+    import { Dialog } from 'vant';
     export default {
         name: "Cart",
         computed:{//计算属性，实时计算监测
             //取数据
             ...mapState(["shopCart"])
+        },
+        methods:{
+            ...mapMutations(["REDUCE_CART","ADD_GOODS","SELECTED_SINGLE_GOODS"]),
+            //1.移出购物车
+            removeOutCart(goodsId,goodsNum){
+                if(goodsNum>1){
+                    this.REDUCE_CART({goodsId});
+                }else if(goodsNum===1){//挽留
+                    Dialog.confirm({
+                        title: '温馨提示',
+                        message: '确定要删除该商品吗？'
+                    }).then(() => {//点击了确定
+                        this.REDUCE_CART({goodsId});
+                    }).catch(() => {//点击了取消
+                        // do nothing
+                    });
+
+                }
+            },
+            //2.增加商品
+            addToCart(goodsId,goodsName,smallImage,goodsPrice){
+                this.ADD_GOODS({
+                    goodsId,
+                    goodsName,
+                    smallImage,
+                    goodsPrice
+                })
+            },
+            //3.单个商品的选中和取消选中
+            singleGoodsSelected(goodsId){
+                this.SELECTED_SINGLE_GOODS({goodsId});
+            }
         }
     }
 </script>
