@@ -83,15 +83,16 @@ export default {
             setStore("shopCart0", state.shopCart)
         }
     },
+
     //5.所有商品的选中和取消选中
     [SELECTED_ALL_GOODS](state,{isSelected}){
         //拿到购物车中的所有商品
         let shopCart = state.shopCart;
         Object.values(shopCart).forEach((goods,index)=>{
             if(goods.checked){//存在该属性
-                goods.checked = !goods.checked;
+                goods.checked = !isSelected;
             }else{//不存在该属性，则添加
-                Vue.set(goods,"checked",true)
+                Vue.set(goods,"checked",!isSelected)
             }
         });
         //5.1同步数据

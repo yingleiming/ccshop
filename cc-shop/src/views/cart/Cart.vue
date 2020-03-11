@@ -67,7 +67,7 @@
         computed:{//计算属性，实时计算监测
             //取数据
             ...mapState(["shopCart"]),
-            //计算是否全选
+            //1.商品是否全选
             isSelectedAll(){
                 let tag = true;
                 Object.values(this.shopCart).forEach((goods,index)=>{
@@ -76,7 +76,9 @@
                     }
                 });
                 return tag;
-            }
+            },
+            //2.计算商品总价
+            
         },
         methods:{
             ...mapMutations(["REDUCE_CART","ADD_GOODS","SELECTED_SINGLE_GOODS","SELECTED_ALL_GOODS"]),
