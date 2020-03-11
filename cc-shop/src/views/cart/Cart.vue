@@ -48,11 +48,11 @@
                     </a>
                     <span style="font-size: 16px;">全选</span>
                     <div class="selectAll">
-                        合计：<span class="totalPrice">199.00</span>
+                        合计：<span class="totalPrice">{{totalPrice | moneyFormat}}</span>
                     </div>
                 </div>
                 <div class="tabBarRight">
-                    <a href="#" class="pay">去结算(3)</a>
+                    <a href="#" class="pay">去结算({{goodsCount}})</a>
                 </div>
             </div>
         </div>
@@ -67,9 +67,13 @@
         computed:{//计算属性，实时计算监测
             //取数据
             ...mapState(["shopCart"]),
+            //0.商品总件数
+            goodsCount(){
+                return Object.keys(this.shopCart).length;
+            },
             //1.商品是否全选
             isSelectedAll(){
-                let tag = true;
+                let tag = this.goodsCount > 0;
                 Object.values(this.shopCart).forEach((goods,index)=>{
                     if(!goods.checked){
                         tag = false;
@@ -78,7 +82,15 @@
                 return tag;
             },
             //2.计算商品总价
-            
+            totalPrice(){
+                let totalPrice = 0;
+                Object.values(this.shopCart).forEach((goods,index)=>{
+                        if(goods.checked){
+                            totalPrice += goods.num*goods.price;
+                        }
+                });
+                return totalPrice;
+            }
         },
         methods:{
             ...mapMutations(["REDUCE_CART","ADD_GOODS","SELECTED_SINGLE_GOODS","SELECTED_ALL_GOODS"]),
