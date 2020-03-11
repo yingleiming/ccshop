@@ -39,7 +39,13 @@
             <!--底部通栏-->
             <div class="tabBar">
                 <div class="tabBarLeft">
-                    <a href="javascript:;" class="cartCheckBox"></a>
+                    <a
+                        href="javascript:;"
+                        class="cartCheckBox"
+                        :checked="isSelectedAll"
+                        @click.stop="selectedAll(isSelectedAll)"
+                    >
+                    </a>
                     <span style="font-size: 16px;">全选</span>
                     <div class="selectAll">
                         合计：<span class="totalPrice">199.00</span>
@@ -60,10 +66,20 @@
         name: "Cart",
         computed:{//计算属性，实时计算监测
             //取数据
-            ...mapState(["shopCart"])
+            ...mapState(["shopCart"]),
+            //计算是否全选
+            isSelectedAll(){
+                let tag = true;
+                Object.values(this.shopCart).forEach((goods,index)=>{
+                    if(!goods.checked){
+                        tag = false;
+                    }
+                });
+                return tag;
+            }
         },
         methods:{
-            ...mapMutations(["REDUCE_CART","ADD_GOODS","SELECTED_SINGLE_GOODS"]),
+            ...mapMutations(["REDUCE_CART","ADD_GOODS","SELECTED_SINGLE_GOODS","SELECTED_ALL_GOODS"]),
             //1.移出购物车
             removeOutCart(goodsId,goodsNum){
                 if(goodsNum>1){
@@ -92,6 +108,10 @@
             //3.单个商品的选中和取消选中
             singleGoodsSelected(goodsId){
                 this.SELECTED_SINGLE_GOODS({goodsId});
+            },
+            //4.全选和取消全选
+            selectedAll(isSelected){
+                this.SELECTED_ALL_GOODS({isSelected});
             }
         }
     }

@@ -3,7 +3,8 @@ import {
     ADD_GOODS,
     INIT_SHOP_CART,
     REDUCE_CART,
-    SELECTED_SINGLE_GOODS
+    SELECTED_SINGLE_GOODS,
+    SELECTED_ALL_GOODS
 } from "./mutations-type"
 
 import {getStore,setStore} from "./../config/global"
@@ -65,7 +66,7 @@ export default {
     },
 
     //4.单个商品的选中和取消选中
-    SELECTED_SINGLE_GOODS(state,{goodsId}){
+    [SELECTED_SINGLE_GOODS](state,{goodsId}){
         //拿到购物车中的所有商品
         let shopCart = state.shopCart;
         //拿到单个商品
@@ -81,6 +82,20 @@ export default {
             state.shopCart = {...shopCart};
             setStore("shopCart0", state.shopCart)
         }
-    }
+    },
+    //5.所有商品的选中和取消选中
+    [SELECTED_ALL_GOODS](state,{isSelected}){
+        //拿到购物车中的所有商品
+        let shopCart = state.shopCart;
+        Object.values(shopCart).forEach((goods,index)=>{
+            if(goods.checked){//存在该属性
+                goods.checked = !goods.checked;
+            }else{//不存在该属性，则添加
+                Vue.set(goods,"checked",true)
+            }
+        });
+        //5.1同步数据
+        state.shopCart = {...shopCart};
+    },
 
 }
