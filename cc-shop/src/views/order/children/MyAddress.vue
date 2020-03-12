@@ -10,13 +10,15 @@
         <van-address-list
                 v-model="chosenAddressId"
                 :list="list"
-                :disabled-list="disabledList"
-                disabled-text="以下地址超出配送范围"
                 default-tag-text="默认"
                 @add="onAdd"
                 @edit="onEdit"
                 style="margin-top: 3rem;"
         ></van-address-list>
+        <!--一定要有出口出口出口-->
+        <transition name="router-slide" mode="out-in">
+            <router-view></router-view>
+        </transition>
 
     </div>
 </template>
@@ -42,14 +44,6 @@
                         address: '浙江省杭州市拱墅区莫干山路 50 号'
                     }
                 ],
-                disabledList: [
-                    {
-                        id: '3',
-                        name: '王五',
-                        tel: '1320000000',
-                        address: '浙江省杭州市滨江区江南大道 15 号'
-                    }
-                ]
             }
         },
         methods:{
@@ -58,10 +52,16 @@
                 this.$router.go(-1);
             },
             onAdd() {
-                Toast('新增地址');
+                // Toast('新增地址');
+                this.$router.push({
+                    path:"/confirmOrder/myAddress/addAddress"
+                })
             },
             onEdit(item, index) {
-                Toast('编辑地址:' + index);
+                // Toast('编辑地址:' + index);
+                this.$router.push({
+                    path:"/confirmOrder/myAddress/editAddress"
+                })
             }
         }
     }
@@ -76,5 +76,13 @@
         right: 0;
         z-index: 200;
         background-color: #f5f5f5;
+    }
+    /*转场动画*/
+    .router-slide-enter-active,.router-slide-leave-active{
+        transition: all 0.5s;
+    }
+    .router-slide-enter,.router-slide-leave{
+        transform: translate3d(2rem,0,0);
+        opacity: 0;
     }
 </style>

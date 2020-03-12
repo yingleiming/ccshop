@@ -41,3 +41,7 @@ Vue.use(ContactEdit);
 import { AddressList } from 'vant';
 
 Vue.use(AddressList);
+//地址编辑
+import { AddressEdit } from 'vant';
+
+Vue.use(AddressEdit);

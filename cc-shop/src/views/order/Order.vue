@@ -43,6 +43,7 @@
         height: 100%;
         background-color: #f5f5f5;
     }
+    /*转场动画*/
     .router-slide-enter-active,.router-slide-leave-active{
         transition: all 0.5s;
     }
