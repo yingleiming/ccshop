@@ -67,13 +67,19 @@
         computed:{//计算属性，实时计算监测
             //取数据
             ...mapState(["shopCart"]),
-            //0.商品总件数
+            //0.选中商品总件数
             goodsCount(){
-                return Object.keys(this.shopCart).length;
+                let selectedGoodsCount = 0;
+                Object.values(this.shopCart).forEach((goods,index)=>{
+                    if(goods.checked){
+                        selectedGoodsCount += 1;
+                    }
+                });
+                return selectedGoodsCount;
             },
             //1.商品是否全选
             isSelectedAll(){
-                let tag = this.goodsCount > 0;
+                let tag = Object.keys(this.shopCart).length > 0;
                 Object.values(this.shopCart).forEach((goods,index)=>{
                     if(!goods.checked){
                         tag = false;
