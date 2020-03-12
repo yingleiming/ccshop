@@ -4,7 +4,8 @@ import {
     INIT_SHOP_CART,
     REDUCE_CART,
     SELECTED_SINGLE_GOODS,
-    SELECTED_ALL_GOODS
+    SELECTED_ALL_GOODS,
+    CLEAR_CART,
 } from "./mutations-type"
 
 import {getStore,setStore} from "./../config/global"
@@ -60,7 +61,7 @@ export default {
             }
             //3.2同步数据
             state.shopCart = {...shopCart};
-            setStore("shopCart0", state.shopCart)
+            setStore("shopCart", state.shopCart);
 
         }
     },
@@ -80,7 +81,7 @@ export default {
             }
             //4.1同步数据
             state.shopCart = {...shopCart};
-            setStore("shopCart0", state.shopCart)
+            setStore("shopCart", state.shopCart);
         }
     },
 
@@ -97,6 +98,14 @@ export default {
         });
         //5.1同步数据
         state.shopCart = {...shopCart};
+    },
+
+    //6.清空购物车
+    [CLEAR_CART](state){
+        state.shopCart = null;
+        state.shopCart = {...state.shopCart};//防止深拷贝
+        //6.1同步数据
+        setStore("shopCart", state.shopCart);
     },
 
 }
