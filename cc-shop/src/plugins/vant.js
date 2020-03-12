@@ -25,3 +25,19 @@ Vue.use(Toast);
 import { Dialog } from 'vant';
 
 Vue.use(Dialog);
+
+//导航条
+import { NavBar } from 'vant';
+
+Vue.use(NavBar);
+
+//地址
+import { ContactCard, ContactList, ContactEdit } from 'vant';
+
+Vue.use(ContactCard);
+Vue.use(ContactList);
+Vue.use(ContactEdit);
+
+import { AddressList } from 'vant';
+
+Vue.use(AddressList);
