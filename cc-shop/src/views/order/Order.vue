@@ -7,13 +7,19 @@
             :border=true
             @click-left="onClickLeft"
         ></van-nav-bar>
+
+
+
         <!--收货地址-->
         <van-contact-card
-                type="add"
-                add-text="选择收货地址"
-                @click="chooseAddress()"
-                style="margin-top: 3rem;"
+            type="add"
+            add-text="选择收货地址"
+            @click="chooseAddress()"
+            style="margin-top: 3rem;"
         ></van-contact-card>
+        <van-cell-group style="margin-top: 0.6rem">
+            <van-cell title="送达时间" value="请选择送达时间" is-link></van-cell>
+        </van-cell-group>
         <transition name="router-slide" mode="out-in">
             <router-view></router-view>
         </transition>

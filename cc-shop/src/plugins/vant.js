@@ -45,3 +45,10 @@ Vue.use(AddressList);
 import { AddressEdit } from 'vant';
 
 Vue.use(AddressEdit);
+
+//单元格
+import { Cell, CellGroup } from 'vant';
+
+Vue.use(Cell);
+Vue.use(CellGroup);
+
