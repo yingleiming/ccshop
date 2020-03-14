@@ -19,7 +19,18 @@
         ></van-contact-card>
         <van-cell-group style="margin-top: 0.6rem">
             <van-cell title="送达时间" value="请选择送达时间" is-link></van-cell>
+            <van-cell value="内容" is-link :center=true>
+                <!-- 使用 title 插槽来自定义标题 -->
+                <template slot="title">
+                    <img src="./images/detail1.jpg" alt="" width="30px">
+                    <img src="./images/detail1.jpg" alt="" width="30px">
+                    <img src="./images/detail1.jpg" alt="" width="30px">
+                </template>
+            </van-cell>
         </van-cell-group>
+
+
+
         <transition name="router-slide" mode="out-in">
             <router-view></router-view>
         </transition>
