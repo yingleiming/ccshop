@@ -7,6 +7,10 @@
             :border=true
             @click-left="onClickLeft"
         ></van-nav-bar>
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
         <!--收货地址-->
         <van-contact-card
             type="add"
@@ -25,7 +29,11 @@
                 </template>
             </van-cell>
         </van-cell-group>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> dev
         <transition name="router-slide" mode="out-in">
             <router-view></router-view>
         </transition>
