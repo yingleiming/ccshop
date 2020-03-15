@@ -26,8 +26,6 @@
             </van-cell>
         </van-cell-group>
 
-
-
         <transition name="router-slide" mode="out-in">
             <router-view></router-view>
         </transition>
