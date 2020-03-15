@@ -7,9 +7,6 @@
             :border=true
             @click-left="onClickLeft"
         ></van-nav-bar>
-
-
-
         <!--收货地址-->
         <van-contact-card
             type="add"
