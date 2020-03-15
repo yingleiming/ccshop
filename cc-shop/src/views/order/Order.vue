@@ -8,8 +8,6 @@
             @click-left="onClickLeft"
         ></van-nav-bar>
 
-
-
         <!--收货地址-->
         <van-contact-card
             type="add"
@@ -28,9 +26,7 @@
                 </template>
             </van-cell>
         </van-cell-group>
-
-
-
+        
         <transition name="router-slide" mode="out-in">
             <router-view></router-view>
         </transition>
