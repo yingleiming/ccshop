@@ -4,6 +4,8 @@ export default {
     shopCart:{},//用对象，如果用数组的话，可能会出现深拷贝浅拷贝的问题
 
     //用户信息
-    userInfo:{}
+    userInfo:{
+
+    }
 
 }

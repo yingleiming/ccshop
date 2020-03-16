@@ -1,5 +1,5 @@
 <template>
-    <div id="mine">
+    <div id="mine" v-if="userInfo.token">
         <van-nav-bar
             title="我的"
             :fixed=true
@@ -50,11 +50,17 @@
         </van-cell-group>
 
     </div>
+    <SelectedLogin v-else/>
 </template>
 
 <script>
+    import SelectedLogin from './../../views/login/SelectedLogin';
+    import {mapState} from "vuex";
     export default {
         name: "Mine",
+        components:{
+            SelectedLogin
+        },
         data(){
             return{
                 orderData:[
@@ -64,6 +70,9 @@
                     {icon:"cash-back-record",title:"售后/退款"},
                 ]
             }
+        },
+        computed:{
+            ...mapState(["userInfo"]),//取数据
         }
     }
 </script>
