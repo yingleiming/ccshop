@@ -4,33 +4,33 @@
             <van-tabbar-item replace to="/dashboard/home">
                 <span>首页</span>
                 <img
-                        slot="icon"
-                        slot-scope="props"
-                        :src="props.active ? icon.active : icon.inactive"
+                    slot="icon"
+                    slot-scope="props"
+                    :src="props.active ? icon.active : icon.inactive"
                 >
             </van-tabbar-item>
             <van-tabbar-item replace to="/dashboard/category">
                 <span>分类</span>
                 <img
-                        slot="icon"
-                        slot-scope="props"
-                        :src="props.active ? icon.active : icon.inactive"
+                    slot="icon"
+                    slot-scope="props"
+                    :src="props.active ? icon.active : icon.inactive"
                 >
             </van-tabbar-item>
             <van-tabbar-item replace to="/dashboard/cart" :info="goodsNum>0?goodsNum:''">
                 <span>购物车</span>
                 <img
-                        slot="icon"
-                        slot-scope="props"
-                        :src="props.active ? icon.active : icon.inactive"
+                    slot="icon"
+                    slot-scope="props"
+                    :src="props.active ? icon.active : icon.inactive"
                 >
             </van-tabbar-item>
             <van-tabbar-item replace to="/dashboard/mine">
                 <span>我的</span>
                 <img
-                        slot="icon"
-                        slot-scope="props"
-                        :src="props.active ? icon.active : icon.inactive"
+                    slot="icon"
+                    slot-scope="props"
+                    :src="props.active ? icon.active : icon.inactive"
                 >
             </van-tabbar-item>
 
