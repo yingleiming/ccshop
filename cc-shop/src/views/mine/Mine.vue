@@ -36,21 +36,17 @@
         </van-cell-group>
 
         <van-cell-group style="margin-top: 0.6rem;">
-            <van-cell icon="label" title="我的优惠券" value="查看所有的订单" is-link></van-cell>
+            <van-cell icon="bill" title="我的优惠券" value="查看所有的订单" is-link></van-cell>
+            <van-cell icon="location" title="我的收获地址" value="查看所有的订单" is-link></van-cell>
         </van-cell-group>
 
         <van-cell-group style="margin-top: 0.6rem;">
-            <van-cell icon="label" title="我的优惠券" value="查看所有的订单" is-link></van-cell>
-            <van-cell icon="label" title="我的优惠券" value="查看所有的订单" is-link></van-cell>
+            <van-cell icon="phone" title="联系客服" value="客服时间07：00-22：00" is-link></van-cell>
+            <van-cell icon="phone-circle" title="意见反馈" value="查看所有的订单" is-link></van-cell>
         </van-cell-group>
 
         <van-cell-group style="margin-top: 0.6rem;">
-            <van-cell icon="label" title="我的优惠券" value="查看所有的订单" is-link></van-cell>
-            <van-cell icon="label" title="我的优惠券" value="查看所有的订单" is-link></van-cell>
-        </van-cell-group>
-
-        <van-cell-group style="margin-top: 0.6rem;">
-            <van-cell icon="label" title="我的优惠券" value="查看所有的订单" is-link></van-cell>
+            <van-cell icon="wap-home" title="小撩买菜" value="下载APP体验更加" is-link></van-cell>
         </van-cell-group>
 
     </div>
