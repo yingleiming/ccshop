@@ -52,3 +52,8 @@ import { Cell, CellGroup } from 'vant';
 Vue.use(Cell);
 Vue.use(CellGroup);
 
+//提交订单栏
+import { SubmitBar } from 'vant';
+
+Vue.use(SubmitBar);
+
