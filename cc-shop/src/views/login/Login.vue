@@ -20,8 +20,8 @@
                     <div :class="{current: loginMode}">
                         <section class="login-message">
                             <input type="number" maxlength="11" placeholder="手机号">
-                            <button class="get-verification">获取验证码</button>
-                            <button disabled="disabled" class="get-verification">
+                            <button v-if="1" class="get-verification">获取验证码</button>
+                            <button v-else disabled="disabled" class="get-verification">
                                 已发送
                             </button>
                         </section>
@@ -43,7 +43,7 @@
                                 <input type="password" maxlength="20" placeholder="密码" autocomplete="off"/>
                                 <input type="text" maxlength="20" placeholder="密码" autocomplete="off"/>
                                 <div class="switch-show">
-                                    <img src="./images/hide_pwd.png"  alt="" width="20">
+                                    <img src="./images/hide_pwd.png" class="on"  alt="" width="20">
                                     <img src="./images/show_pwd.png"  alt="" width="20">
                                 </div>
                             </section>
