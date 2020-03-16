@@ -9,8 +9,8 @@
                 </div>
                 <!--面板标题-->
                 <div class="login-header-title">
-                    <a href="javascript:;">手机登录</a>
-                    <a href="javascript:;">密码登录</a>
+                    <a href="javascript:;" :class="{current: loginMode}" @click="dealLoginMode(true)">手机登录</a>
+                    <a href="javascript:;" :class="{current: !loginMode}" @click="dealLoginMode(false)">密码登录</a>
                 </div>
             </div>
             <!--面板表单部分-->
@@ -34,7 +34,7 @@
                         </section>
                     </div>
                     <!--账号登录部分-->
-                    <div>
+                    <div :class="{current: !loginMode}">
                         <section>
                             <section class="login-message">
                                 <input type="tel" maxlength="11" placeholder="用户名">
@@ -67,7 +67,19 @@
 
 <script>
     export default {
-        name: "Login"
+        name: "Login",
+        data(){
+            return{
+                //登陆模式
+                loginMode:true
+            }
+        },
+        methods:{
+            //处理登陆模式
+            dealLoginMode(flag){
+                this.loginMode = flag;
+            }
+        }
     }
 </script>
 
