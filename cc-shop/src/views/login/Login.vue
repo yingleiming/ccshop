@@ -19,10 +19,10 @@
                     <!--手机验证码登录部分-->
                     <div :class="{current: loginMode}">
                         <section class="login-message">
-                            <input type="number" maxlength="11" placeholder="手机号">
-                            <button v-if="1" class="get-verification">获取验证码</button>
+                            <input type="number" maxlength="11" placeholder="手机号" v-model="phone">
+                            <button v-if="!countDown" class="get-verification" :class="{phone_right:phoneRight}">获取验证码</button>
                             <button v-else disabled="disabled" class="get-verification">
-                                已发送
+                                已发送{{countDown}}s
                             </button>
                         </section>
                         <section class="login-verification">
@@ -71,7 +71,18 @@
         data(){
             return{
                 //登陆模式
-                loginMode:true
+                loginMode:true,
+                //手机号码
+                phone:null,
+                //倒计时
+                countDown:0,
+
+            }
+        },
+        computed:{
+            //验证手机号码是否合法
+            phoneRight(){
+                return /^[1][3,4,5,7,8][0-9]{9}$/.test(this.phone);
             }
         },
         methods:{
