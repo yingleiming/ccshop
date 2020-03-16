@@ -57,3 +57,9 @@ import { SubmitBar } from 'vant';
 
 Vue.use(SubmitBar);
 
+//宫格
+import { Grid, GridItem } from 'vant';
+
+Vue.use(Grid);
+Vue.use(GridItem);
+
