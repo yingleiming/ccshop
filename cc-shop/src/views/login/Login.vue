@@ -20,7 +20,7 @@
                     <div :class="{current: loginMode}">
                         <section class="login-message">
                             <input type="number" maxlength="11" placeholder="手机号" v-model="phone">
-                            <button v-if="!countDown" class="get-verification" :class="{phone_right:phoneRight}">获取验证码</button>
+                            <button v-if="!countDown" class="get-verification" :class="{phone_right:phoneRight}" @click="getVerifyCode()">获取验证码</button>
                             <button v-else disabled="disabled" class="get-verification">
                                 已发送{{countDown}}s
                             </button>
@@ -66,6 +66,7 @@
 </template>
 
 <script>
+    import {getPhoneCode} from "./../../service/api/index"
     export default {
         name: "Login",
         data(){
@@ -86,9 +87,26 @@
             }
         },
         methods:{
-            //处理登陆模式
+            //1.处理登陆模式
             dealLoginMode(flag){
                 this.loginMode = flag;
+            },
+            //2.获取验证码
+            async getVerifyCode(){
+                //2.1过滤 只有当手机号码正确的时候才能具有点击事件
+                if(this.phoneRight){
+                    this.countDown = 60;
+                    //2.2 倒计时
+                    this.intervalId = setInterval(()=>{
+                        this.countDown--;
+                        if(this.countDown === 0){
+                            clearInterval(this.intervalId);
+                        }
+                    },1000)
+                }
+                //2.3获取短信验证码
+                let result = await getPhoneCode(this.phone);
+                console.log(result);
             }
         }
     }

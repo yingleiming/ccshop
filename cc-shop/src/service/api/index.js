@@ -18,7 +18,7 @@ export const getCategoriesDetail = (param)=>ajax(BASE_URL+"api/homeApi/categorie
 
 // http://demo.itlike.com/web/xlmc/api/send_code
 // localhost:3000/web/xlmc/api/send_code
-const LOCAL_BASIC_URL = "http://localhost:3000/web/xlmc/";
+const LOCAL_BASIC_URL = "http://demo.itlike.com/web/xlmc/";
 //2.1获取短信验证码
 export const getPhoneCode = (phone)=>ajax(LOCAL_BASIC_URL+"api/send_code",{phone});
 
