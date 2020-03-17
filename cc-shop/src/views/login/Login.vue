@@ -144,7 +144,7 @@
                     }
                     //3.1.2手机验证码登陆
                     let result = await phoneCodeLogin(this.phone,this.code);
-
+                    console.log(result);
 
                 }else{//用户名和密码登陆
 
