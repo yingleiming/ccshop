@@ -6,6 +6,8 @@ import {
     SELECTED_SINGLE_GOODS,
     SELECTED_ALL_GOODS,
     CLEAR_CART,
+    USER_INFO,
+    INIT_USER_INFO,
 } from "./mutations-type"
 
 import {getStore,setStore} from "./../config/global"
@@ -107,5 +109,22 @@ export default {
         //6.1同步数据
         setStore("shopCart", state.shopCart);
     },
+
+    //7.保存用户信息到本地
+    [USER_INFO](state,{userInfo}){
+        state.userInfo = userInfo;
+        setStore("userInfo",state.userInfo);
+    },
+
+    //8.初始化用户信息
+    [INIT_USER_INFO](state){
+        //8.1获取用户信息
+        let userInfo = getStore("userInfo");
+        //8.2判断
+        if(userInfo){
+            state.userInfo = JSON.parse(userInfo);//用户信息同步到本地
+
+        }
+    }
 
 }

@@ -67,6 +67,7 @@
 
 <script>
     import {getPhoneCode, phoneCodeLogin} from "./../../service/api/index"
+    import {mapMutations} from "vuex"
     import {Toast} from "vant"
     export default {
         name: "Login",
@@ -79,7 +80,9 @@
                 //倒计时
                 countDown:0,
                 //手机验证码
-                code:null
+                code:null,
+                //用户信息
+                userInfo:null,
             }
         },
         computed:{
@@ -89,6 +92,7 @@
             }
         },
         methods:{
+            ...mapMutations(["USER_INFO"]),
             //1.处理登陆模式
             dealLoginMode(flag){
                 this.loginMode = flag;
@@ -145,9 +149,28 @@
                     //3.1.2手机验证码登陆
                     let result = await phoneCodeLogin(this.phone,this.code);
                     console.log(result);
+                    if(result.success_code===200){
+                        this.userInfo = result.data;
+                    }else {
+                        this.userInfo = {
+                            message : "登陆失败，手机号码或验证码不正确！"
+                        }
+                    }
 
                 }else{//用户名和密码登陆
 
+                }
+                //4.后续处理
+                if(!this.userInfo.token){//失败
+                    Toast({
+                        message:this.userInfo.message,
+                        duration:500
+                    });
+                }else{//成功登陆
+                    //4.1保存用户信息
+                    this.USER_INFO(this.userInfo);
+                    //4.2回到主面板
+                    this.$router.back();
                 }
             }
         }
