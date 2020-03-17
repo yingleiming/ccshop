@@ -26,7 +26,7 @@
                             </button>
                         </section>
                         <section class="login-verification">
-                            <input type="number" maxlength="8" placeholder="验证码" />
+                            <input type="number" maxlength="8" placeholder="验证码" v-model="code"/>
                         </section>
                         <section class="login-hint">
                             温馨提示：未注册小撩买菜的手机号，登录时将自动注册，且代表已同意
@@ -57,7 +57,7 @@
                             </section>
                         </section>
                     </div>
-                    <button class="login-submit" >登录</button>
+                    <button class="login-submit" @click="login">登录</button>
                 </form>
                 <button class="login-back">返回</button>
             </div>
@@ -66,7 +66,8 @@
 </template>
 
 <script>
-    import {getPhoneCode} from "./../../service/api/index"
+    import {getPhoneCode, phoneCodeLogin} from "./../../service/api/index"
+    import {Toast} from "vant"
     export default {
         name: "Login",
         data(){
@@ -77,7 +78,8 @@
                 phone:null,
                 //倒计时
                 countDown:0,
-
+                //手机验证码
+                code:null
             }
         },
         computed:{
@@ -107,6 +109,46 @@
                 //2.3获取短信验证码
                 let result = await getPhoneCode(this.phone);
                 console.log(result);
+            },
+            //3.登陆
+            async login(){
+                //3.1判断登陆模式
+                if(this.loginMode){//手机验证码登陆
+                    //3.1.1输入数据校验
+                    if(!this.phone.trim()){
+                        Toast({
+                            message:"请输入手机号码",
+                            duration:500
+                        });
+                        return;
+                    }else if(!this.phoneRight){
+                        Toast({
+                            message:"手机号码不正确，请重新输入",
+                            duration:500
+                        });
+                        return;
+                    }
+
+                    if(!this.code.trim()){
+                        Toast({
+                            message:"请输入验证码",
+                            duration:500
+                        });
+                        return;
+                    }else if(!(/^\d{6}$/gi.test(this.code))){
+                        Toast({
+                            message:"验证码不正确，请重新输入",
+                            duration:500
+                        });
+                        return;
+                    }
+                    //3.1.2手机验证码登陆
+                    let result = await phoneCodeLogin(this.phone,this.code);
+
+
+                }else{//用户名和密码登陆
+
+                }
             }
         }
     }
