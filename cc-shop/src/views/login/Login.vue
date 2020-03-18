@@ -20,7 +20,7 @@
                     <div :class="{current: loginMode}">
                         <section class="login-message">
                             <input type="number" maxlength="11" placeholder="手机号" v-model="phone">
-                            <button v-if="!countDown" class="get-verification" :class="{phone_right:phoneRight}" @click="getVerifyCode()">获取验证码</button>
+                            <button v-if="!countDown" class="get-verification" :class="{phone_right:phoneRight}" @click.prevent="getVerifyCode()">获取验证码</button>
                             <button v-else disabled="disabled" class="get-verification">
                                 已发送{{countDown}}s
                             </button>
@@ -57,7 +57,7 @@
                             </section>
                         </section>
                     </div>
-                    <button class="login-submit" @click="login">登录</button>
+                    <button class="login-submit" @click.prevent="login">登录</button>
                 </form>
                 <button class="login-back">返回</button>
             </div>
@@ -67,7 +67,7 @@
 
 <script>
     import {getPhoneCode, phoneCodeLogin} from "./../../service/api/index"
-    import {mapMutations} from "vuex"
+    import {mapActions} from "vuex"
     import {Toast} from "vant"
     export default {
         name: "Login",
@@ -92,7 +92,7 @@
             }
         },
         methods:{
-            ...mapMutations(["USER_INFO"]),
+            ...mapActions(["syncUserInfo"]),
             //1.处理登陆模式
             dealLoginMode(flag){
                 this.loginMode = flag;
@@ -146,31 +146,24 @@
                         });
                         return;
                     }
+
                     //3.1.2手机验证码登陆
                     let result = await phoneCodeLogin(this.phone,this.code);
                     console.log(result);
                     if(result.success_code===200){
-                        this.userInfo = result.data;
+                        //4.1保存用户信息
+                        this.syncUserInfo(result.data);
+                        //4.2回到主面板
+                        this.$router.back();
                     }else {
-                        this.userInfo = {
-                            message : "登陆失败，手机号码或验证码不正确！"
-                        }
+                        Toast({
+                            message:"登陆失败，手机号码或验证码不正确！",
+                            duration:500
+                        });
                     }
 
                 }else{//用户名和密码登陆
 
-                }
-                //4.后续处理
-                if(!this.userInfo.token){//失败
-                    Toast({
-                        message:this.userInfo.message,
-                        duration:500
-                    });
-                }else{//成功登陆
-                    //4.1保存用户信息
-                    this.USER_INFO(this.userInfo);
-                    //4.2回到主面板
-                    this.$router.back();
                 }
             }
         }
