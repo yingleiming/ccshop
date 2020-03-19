@@ -37,29 +37,32 @@
                     <div :class="{current: !loginMode}">
                         <section>
                             <section class="login-message">
-                                <input type="tel" maxlength="11" placeholder="用户名">
+                                <input type="tel" maxlength="11" placeholder="用户名" v-model="user_name">
                             </section>
                             <section class="login-verification">
-                                <input type="password" maxlength="20" placeholder="密码" autocomplete="off"/>
-                                <input type="text" maxlength="20" placeholder="密码" autocomplete="off"/>
+                                <!--密码框只允许显示一个 明文 or 密文-->
+                                <input v-if="pwdMode" type="password" maxlength="20" placeholder="密码" v-model="pwd" autocomplete="off"/>
+                                <input v-else type="text" maxlength="20" placeholder="密码" v-model="pwd" autocomplete="off"/>
                                 <div class="switch-show">
-                                    <img src="./images/hide_pwd.png" class="on"  alt="" width="20">
-                                    <img src="./images/show_pwd.png"  alt="" width="20">
+                                    <img @click.prevent="dealPwdMode(false)" src="./images/hide_pwd.png" class="on"  alt="" width="20">
+                                    <img @click.prevent="dealPwdMode(true)" src="./images/show_pwd.png"  alt="" width="20">
                                 </div>
                             </section>
                             <section class="login-message">
-                                <input type="text" maxlength="4" placeholder="验证码" >
+                                <input type="text" maxlength="4" placeholder="验证码" v-model="captcha">
                                 <img
                                     class="get-verification"
                                     src="http://demo.itlike.com/web/xlmc/api/captcha"
                                     alt="captcha"
+                                    ref="captcha"
+                                    @click.prevent="getCaptcha()"
                                 >
                             </section>
                         </section>
                     </div>
                     <button class="login-submit" @click.prevent="login">登录</button>
                 </form>
-                <button class="login-back">返回</button>
+                <button class="login-back" @click.prevent="$router.back()">返回</button>
             </div>
         </div>
     </div>
@@ -83,6 +86,11 @@
                 code:null,
                 //用户信息
                 userInfo:null,
+
+                user_name:null,
+                pwd:null,
+                pwdMode:true,//true 密文显示; false 明文显示
+                captcha:null,//图形验证码
             }
         },
         computed:{
@@ -96,6 +104,9 @@
             //1.处理登陆模式
             dealLoginMode(flag){
                 this.loginMode = flag;
+            },
+            dealPwdMode(flag){
+                this.pwdMode = flag;
             },
             //2.获取验证码
             async getVerifyCode(){
@@ -149,7 +160,7 @@
 
                     //3.1.2手机验证码登陆
                     let result = await phoneCodeLogin(this.phone,this.code);
-                    console.log(result);
+                    // console.log(result);
                     if(result.success_code===200){
                         //4.1保存用户信息
                         this.syncUserInfo(result.data);
