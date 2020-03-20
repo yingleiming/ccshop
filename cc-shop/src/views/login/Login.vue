@@ -44,8 +44,8 @@
                                 <input v-if="pwdMode" type="password" maxlength="20" placeholder="密码" v-model="pwd" autocomplete="off"/>
                                 <input v-else type="text" maxlength="20" placeholder="密码" v-model="pwd" autocomplete="off"/>
                                 <div class="switch-show">
-                                    <img @click.prevent="dealPwdMode(false)" src="./images/hide_pwd.png" class="on"  alt="" width="20">
-                                    <img @click.prevent="dealPwdMode(true)" src="./images/show_pwd.png"  alt="" width="20">
+                                    <img @click.prevent="dealPwdMode(false)" src="./images/hide_pwd.png" :class="{on:pwdMode}" alt="" width="20">
+                                    <img @click.prevent="dealPwdMode(true)" src="./images/show_pwd.png"  :class="{on:!pwdMode}" alt="" width="20">
                                 </div>
                             </section>
                             <section class="login-message">
@@ -55,7 +55,7 @@
                                     src="http://demo.itlike.com/web/xlmc/api/captcha"
                                     alt="captcha"
                                     ref="captcha"
-                                    @click.prevent="getCaptcha()"
+                                    @click.prevent="getCaptcha"
                                 >
                             </section>
                         </section>
@@ -104,9 +104,6 @@
             //1.处理登陆模式
             dealLoginMode(flag){
                 this.loginMode = flag;
-            },
-            dealPwdMode(flag){
-                this.pwdMode = flag;
             },
             //2.获取验证码
             async getVerifyCode(){
@@ -176,7 +173,18 @@
                 }else{//用户名和密码登陆
 
                 }
-            }
+            },
+            //4.处理密码的显示
+            dealPwdMode(flag){
+                this.pwdMode = flag;
+            },
+            //5.获取随机验证码
+            getCaptcha(){
+                //5.1获取验证码的标签
+                let captchaEle = this.$refs.captcha;
+                // console.log(captchaEle);
+                this.$set(captchaEle,"src","http://demo.itlike.com/web/xlmc/api/captcha?time="+new Date());
+            },
         }
     }
 </script>
