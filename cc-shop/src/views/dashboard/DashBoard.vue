@@ -43,7 +43,7 @@
 </template>
 
 <script>
-    import {mapState,mapMutations} from "vuex"
+    import {mapState,mapMutations,mapActions} from "vuex"
     export default {
         name: "DashBoard",
         data() {
@@ -56,7 +56,8 @@
             }
         },
         methods:{
-            ...mapMutations(["INIT_SHOP_CART"])
+            ...mapMutations(["INIT_SHOP_CART"]),
+            ...mapActions(["reqUserInfo"]),
         },
         // 监视
         watch:{
@@ -86,7 +87,11 @@
             }
         },
         mounted(){//此钩子，是页面初始化完毕后调用
-            //1.获取购物车的数据
+
+            //1.自动登陆
+            this.reqUserInfo();
+
+            //2.获取购物车的数据
             this.INIT_SHOP_CART();
 
         },
