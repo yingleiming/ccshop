@@ -25,3 +25,5 @@ export const getPhoneCode = (phone)=>ajax(LOCAL_BASIC_URL+"api/send_code",{phone
 //2.2手机验证码的登陆
 export const phoneCodeLogin = (phone,code)=>ajax(LOCAL_BASIC_URL+"api/login_code",{phone,code},"POST");
 
+//2.3用户名和密码登陆
+export const pwdLogin = (user_name,user_pwd,captcha)=>ajax(LOCAL_BASIC_URL+"api/login_pwd",{user_name,user_pwd,captcha},"POST");

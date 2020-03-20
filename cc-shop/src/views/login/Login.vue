@@ -69,7 +69,7 @@
 </template>
 
 <script>
-    import {getPhoneCode, phoneCodeLogin} from "./../../service/api/index"
+    import {getPhoneCode, phoneCodeLogin,pwdLogin} from "./../../service/api/index"
     import {mapActions} from "vuex"
     import {Toast} from "vant"
     export default {
@@ -170,7 +170,41 @@
                         });
                     }
 
-                }else{//用户名和密码登陆
+                }else{
+                    //3.2用户名和密码登陆
+                    if(!this.user_name){
+                        Toast({
+                            message:"请输入用户名",
+                            duration:500
+                        });
+                        return;
+                    }else if(!this.pwd){
+                        Toast({
+                            message:"请输入密码",
+                            duration:500
+                        });
+                        return;
+                    }else if(!this.captcha){
+                        Toast({
+                            message:"请输入验证码",
+                            duration:500
+                        });
+                        return;
+                    }
+                    //3.2.1 发起请求
+                    let result = await pwdLogin(this.user_name,this.pwd,this.captcha);
+                    // console.log(result);
+                    if(result.success_code===200){
+                        //4.1保存用户信息
+                        this.syncUserInfo(result.data);
+                        //4.2回到主面板
+                        this.$router.back();
+                    }else {
+                        Toast({
+                            message:"登陆失败，用户名或密码不正确！",
+                            duration:500
+                        });
+                    }
 
                 }
             },
