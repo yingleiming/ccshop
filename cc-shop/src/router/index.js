@@ -8,6 +8,7 @@ const Cart = ()=>import("./../views/cart/Cart.vue");
 const Category = ()=>import("./../views/category/Category.vue");
 const Home = ()=>import("./../views/home/Home.vue");
 const Mine = ()=>import("./../views/mine/Mine.vue");
+const UserCenter = ()=>import("./../views/mine/children/UserCenter.vue");
 
 //引入组件相关
 const Order = ()=>import("./../views/order/Order.vue");
@@ -32,7 +33,14 @@ export default new Router({
                 {path:"home",name:"home",component:Home,meta: { keepAlive: true }},
                 {path:"cart",name:"cart",component:Cart},
                 {path:"category",name:"category",component:Category,meta: { keepAlive: true }},
-                {path:"mine",name:"mine",component:Mine},
+                {
+                    path:"mine",
+                    name:"mine",
+                    component:Mine,
+                    children:[
+                        {path:"userCenter",name:"userCenter",component:UserCenter}
+                    ]
+                },
             ]
         },
         {

@@ -10,13 +10,14 @@
                 style="background-color:#2eba5a;color: #ffffff"
                 is-link
                 :center=true
+                @click="$router.push('/dashboard/mine/userCenter')"
             >
                 <template slot="title">
                     <div class="personMsg">
-                        <img src="./images/yjh.png" alt="">
+                        <img :src="userInfo.icon_url" alt="">
                         <div class="personInfo">
-                            <span>撩课-盈雷明</span>
-                            <span>微信号：yingleiming</span>
+                            <span>{{userInfo.real_name}}</span>
+                            <span>手机号：{{userInfo.phone}}</span>
                         </div>
                     </div>
                 </template>
@@ -49,6 +50,10 @@
             <van-cell icon="wap-home" title="小撩买菜" value="下载APP体验更加" is-link></van-cell>
         </van-cell-group>
 
+        <!--路由出口-->
+        <transition name="router-slide" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </div>
     <SelectedLogin v-else/>
 </template>
@@ -110,5 +115,14 @@
     .van-icon-label{
         font-size: 1.2rem;
         color: orange;
+    }
+
+    /*转场动画*/
+    .router-slide-enter-active,.router-slide-leave-active{
+        transition: all 0.5s;
+    }
+    .router-slide-enter,.router-slide-leave{
+        transform: translate3d(2rem,0,0);
+        opacity: 0;
     }
 </style>
