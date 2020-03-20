@@ -27,3 +27,10 @@ export const phoneCodeLogin = (phone,code)=>ajax(LOCAL_BASIC_URL+"api/login_code
 
 //2.3用户名和密码登陆
 export const pwdLogin = (user_name,user_pwd,captcha)=>ajax(LOCAL_BASIC_URL+"api/login_pwd",{user_name,user_pwd,captcha},"POST");
+
+//2.4 自动登陆
+export const getUserInfo = ()=>ajax(LOCAL_BASIC_URL+"api/userinfo");
+
+//2.5 退出登陆
+export const getLogOut = ()=>ajax(LOCAL_BASIC_URL+"api/logout");
+

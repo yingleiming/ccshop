@@ -8,9 +8,10 @@ import {
     CLEAR_CART,
     USER_INFO,
     INIT_USER_INFO,
+    RESET_USER_INFO,
 } from "./mutations-type"
 
-import {getStore,setStore} from "./../config/global"
+import {getStore,setStore,removeStore} from "./../config/global"
 import Vue from "vue"
 export default {
     //1.往购物车中添加数据
@@ -125,6 +126,12 @@ export default {
             state.userInfo = JSON.parse(userInfo);//用户信息同步到本地
 
         }
+    },
+
+    //9.重置用户数据
+    [RESET_USER_INFO](state){
+        state.userInfo = {};
+        removeStore("userInfo");
     }
 
 }
