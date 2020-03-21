@@ -45,6 +45,9 @@
                 //发布,通过homeAddToCart进行接收，把goods抛出去
                 PubSub.publish("homeAddToCart",goods);
             }
+        },
+        beforeDestroy() {
+            PubSub.unsubscribe("homeAddToCart");
         }
     }
 </script>

@@ -56,10 +56,13 @@
             product:Object
         },
         methods:{
-            addToCart(goods){//在此组件中进行发送，在Home组件中进行接收
-                PubSub.publish("homeAddToCart",goods);
+            addToCart: function (goods) {//在此组件中进行发送，在Home组件中进行接收
+                PubSub.publish("homeAddToCart", goods);
 
             }
+        },
+        beforeDestroy() {
+            PubSub.unsubscribe("homeAddToCart");
         }
     }
 </script>

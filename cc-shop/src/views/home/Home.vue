@@ -112,6 +112,9 @@
                 let docB = document.documentElement || document.body;
                 animate(docB,{scrollTop:"0"},400,"ease-out");
             }
+        },
+        beforeDestroy() {
+            PubSub.unsubscribe("homeAddToCart");
         }
     }
 </script>
