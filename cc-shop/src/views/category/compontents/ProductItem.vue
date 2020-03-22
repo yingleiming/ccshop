@@ -64,11 +64,6 @@
         props:{
             products:Array
         },
-        data(){
-            return{
-
-            }
-        },
         methods:{
             addToCart(goods){
                 PubSub.publish("homeAddToCart",goods);
