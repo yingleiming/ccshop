@@ -22,6 +22,7 @@
             <!--右边-->
             <ContentView :categoriesDetailData="categoriesDetailData"/>
         </div>
+        <div></div>
         <van-loading
                 v-else
                 type="spinner"
@@ -128,7 +129,6 @@
                     this.categoriesDetailData = rightRes.data.cate;
                     // console.log(this.categoriesDetailData);
                 }
-
             }
         },
         beforeDestroy() {
