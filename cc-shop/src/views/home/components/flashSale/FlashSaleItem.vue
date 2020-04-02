@@ -34,7 +34,6 @@
 <script>
     // 广播
     import PubSub from "pubsub-js"
-
     export default {
         name: "FlashSaleItem",
         props:{

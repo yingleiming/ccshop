@@ -70,7 +70,6 @@
         created() {
             //2.请求网络数据
             this.reqData();
-
         },
         mounted(){
             //订阅消息（添加到购物车的消息）
@@ -89,7 +88,6 @@
                     duration:800
                 });
             })
-
         },
         methods:{
             ...mapMutations(["ADD_GOODS"]),//调用ADD_GOODS方法

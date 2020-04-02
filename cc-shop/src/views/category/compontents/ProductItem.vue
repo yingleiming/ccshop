@@ -73,7 +73,6 @@
         beforeDestroy() {
             PubSub.unsubscribe("homeAddToCart");
         }
-
     }
 </script>
 
