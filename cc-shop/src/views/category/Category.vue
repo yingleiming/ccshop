@@ -43,11 +43,6 @@
     import BScroll from 'better-scroll'
     //3.引入接口
     import {getCategories,getCategoriesDetail} from "./../../service/api/index"
-    //4.引入消息订阅组件
-    import PubSub from "pubsub-js"
-    import { Toast } from 'vant';
-    //5.引入vuex
-    import {mapMutations} from "vuex"
     export default {
         name: "Category",
         data(){
