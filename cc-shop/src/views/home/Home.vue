@@ -40,7 +40,7 @@
     import PubSub from "pubsub-js"
     import { Toast } from 'vant';
     //5.引入vuex
-    import {mapMutations} from "vuex"
+    import {mapMutations,mapState} from "vuex"
     export default {
         name: "Home",
         components:{//注册组件
@@ -71,22 +71,33 @@
             //2.请求网络数据
             this.reqData();
         },
+        computed:{
+            ...mapState(["userInfo"])
+        },
         mounted(){
             //订阅消息（添加到购物车的消息）
             PubSub.subscribe(("homeAddToCart"),(msg,goods)=>{
                 if(msg==="homeAddToCart"){
-                    this.ADD_GOODS({
-                        //追加
-                        goodsId:goods.id,
-                        goodsName:goods.name,
-                        smallImage:goods.small_image,
-                        goodsPrice:goods.price
-                    });
+                    //判断用户是否登陆
+                    if(this.userInfo.token){
+                        //已经登陆
+                        // this.ADD_GOODS({
+                        //     //追加
+                        //     goodsId:goods.id,
+                        //     goodsName:goods.name,
+                        //     smallImage:goods.small_image,
+                        //     goodsPrice:goods.price
+                        // });
+                        // Toast({
+                        //     message:"添加购物车成功！",
+                        //     duration:800
+                        // });
+                    }else{
+                        //没有登陆
+                        this.$router.push("/login")
+                    }
+
                 }
-                Toast({
-                    message:"添加购物车成功！",
-                    duration:800
-                });
             })
         },
         methods:{
