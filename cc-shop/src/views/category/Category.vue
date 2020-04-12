@@ -22,7 +22,6 @@
             <!--右边-->
             <ContentView :categoriesDetailData="categoriesDetailData"/>
         </div>
-        <div></div>
         <van-loading
                 v-else
                 type="spinner"
@@ -72,22 +71,7 @@
             this.initData();
         },
         mounted(){
-            //订阅消息（添加到购物车的消息）
-            PubSub.subscribe(("categoryAddToCart"),(msg,goods)=>{
-                if(msg==="categoryAddToCart"){
-                    this.ADD_GOODS=({
-                        //追加
-                        goodsId:goods.id,
-                        goodsName:goods.name,
-                        smallImage:goods.small_image,
-                        goodsPrice:goods.price
-                    });
-                }
-                Toast({
-                    message:"添加购物车成功！",
-                    duration:800
-                });
-            })
+
 
         },
         methods:{
@@ -131,9 +115,7 @@
                 }
             }
         },
-        beforeDestroy() {
-            PubSub.unsubscribe("categoryAddToCart");
-        }
+
     }
 </script>
 

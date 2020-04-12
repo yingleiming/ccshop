@@ -57,22 +57,29 @@
 </template>
 
 <script>
-    // 广播
-    import PubSub from "pubsub-js"
+    import {mapMutations} from "vuex"
+    import {Toast} from "vant"
     export default {
         name: "ProductItem",
         props:{
             products:Array
         },
         methods:{
+            ...mapMutations(["ADD_GOODS"]),
             addToCart(goods){
-                PubSub.publish("homeAddToCart",goods);
-
+                this.ADD_GOODS=({
+                    //追加
+                    goodsId:goods.id,
+                    goodsName:goods.name,
+                    smallImage:goods.small_image,
+                    goodsPrice:goods.price
+                });
+                Toast({
+                    message:"添加购物车成功！",
+                    duration:800
+                });
             }
         },
-        beforeDestroy() {
-            PubSub.unsubscribe("homeAddToCart");
-        }
     }
 </script>
 
