@@ -34,3 +34,10 @@ export const getUserInfo = ()=>ajax(LOCAL_BASIC_URL+"api/userinfo");
 //2.5 退出登陆
 export const getLogOut = ()=>ajax(LOCAL_BASIC_URL+"api/logout");
 
+
+//3.购物车接口
+/*
+3.1添加商品到购物车 请求方式：POST   参数：{user_id: String, goods_id: String, goods_name: String, goods_price: Number, small_image: String}
+http://demo.itlike.com/web/xlmc/api/cart/add
+ */
+export const addGoodsToCart = (goods_id,goods_name,goods_price,small_image)=>ajax(LOCAL_BASIC_URL + "api/cart/add",{goods_id,goods_name,goods_price,small_image},"POST");

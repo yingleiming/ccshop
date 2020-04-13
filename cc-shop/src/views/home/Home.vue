@@ -41,6 +41,8 @@
     import { Toast } from 'vant';
     //5.引入vuex
     import {mapMutations,mapState} from "vuex"
+    //6.引入购物车接口
+    import {addGoodsToCart} from "./../../service/api/index"
     export default {
         name: "Home",
         components:{//注册组件
@@ -80,6 +82,7 @@
                 if(msg==="homeAddToCart"){
                     //判断用户是否登陆
                     if(this.userInfo.token){
+                        this.dealAddGoods(goods);//抽离出来，处理商品的添加
                         //已经登陆
                         // this.ADD_GOODS({
                         //     //追加
@@ -120,6 +123,13 @@
                 //做缓动动画，返回顶部
                 let docB = document.documentElement || document.body;
                 animate(docB,{scrollTop:"0"},400,"ease-out");
+            },
+            //实现商品添加的方法-添加商品到购物车方法 异步
+            async dealAddGoods(goods){
+                //调用添加到购物车的接口
+               let result = await addGoodsToCart(goods.id,goods.name,goods.small_image,goods.price);
+                console.log(result);
+                // http://demo.itlike.com/web/xlmc/api/cart/add
             }
         },
         beforeDestroy() {
