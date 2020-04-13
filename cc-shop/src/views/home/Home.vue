@@ -78,28 +78,15 @@
         },
         mounted(){
             //订阅消息（添加到购物车的消息）
-            PubSub.subscribe(("homeAddToCart"),(msg,goods)=>{
+            PubSub.subscribe("homeAddToCart",(msg,goods)=>{
                 if(msg==="homeAddToCart"){
                     //判断用户是否登陆
-                    if(this.userInfo.token){
+                    if(this.userInfo.token){//已经登陆
                         this.dealAddGoods(goods);//抽离出来，处理商品的添加
-                        //已经登陆
-                        // this.ADD_GOODS({
-                        //     //追加
-                        //     goodsId:goods.id,
-                        //     goodsName:goods.name,
-                        //     smallImage:goods.small_image,
-                        //     goodsPrice:goods.price
-                        // });
-                        // Toast({
-                        //     message:"添加购物车成功！",
-                        //     duration:800
-                        // });
                     }else{
                         //没有登陆
                         this.$router.push("/login")
                     }
-
                 }
             })
         },
@@ -107,7 +94,8 @@
             ...mapMutations(["ADD_GOODS"]),//调用ADD_GOODS方法
             async reqData(){
                  let res = await getHomeData();
-                 if(res.success){
+                console.log(res);
+                if(res.success){
                      this.sowing_list = res.data.list[0].icon_list;
                      this.nav_list = res.data.list[2].icon_list;
                      this.flash_sale_list = res.data.list[3].product_list;
@@ -127,9 +115,21 @@
             //实现商品添加的方法-添加商品到购物车方法 异步
             async dealAddGoods(goods){
                 //调用添加到购物车的接口
-               let result = await addGoodsToCart(goods.id,goods.name,goods.small_image,goods.price);
+               let result = await addGoodsToCart(goods.id, goods.name, goods.price, goods.small_image,);
                 console.log(result);
-                // http://demo.itlike.com/web/xlmc/api/cart/add
+                if(result.success_code === 200){
+                    //同步本地数据
+                    this.ADD_GOODS({//追加
+                        goodsId:goods.id,
+                        goodsName:goods.name,
+                        smallImage:goods.small_image,
+                        goodsPrice:goods.price
+                    });
+                    Toast({
+                        message:"添加购物车成功！",
+                        duration:800
+                    });
+                }
             }
         },
         beforeDestroy() {
