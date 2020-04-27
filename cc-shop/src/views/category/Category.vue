@@ -29,7 +29,7 @@
                 size="24px"
                 style="position: absolute;top: 40%;left: 50%;transform: translate(-50%)"
         >
-            数据加载中...
+            数据加载中......
         </van-loading>
     </div>
 </template>
@@ -43,11 +43,6 @@
     import BScroll from 'better-scroll'
     //3.引入接口
     import {getCategories,getCategoriesDetail} from "./../../service/api/index"
-    //4.引入消息订阅组件
-    import PubSub from "pubsub-js"
-    import { Toast } from 'vant';
-    //5.引入vuex
-    import {mapMutations} from "vuex"
     export default {
         name: "Category",
         data(){
@@ -71,22 +66,7 @@
             this.initData();
         },
         mounted(){
-            //订阅消息（添加到购物车的消息）
-            PubSub.subscribe(("categoryAddToCart"),(msg,goods)=>{
-                if(msg==="categoryAddToCart"){
-                    this.ADD_GOODS=({
-                        //追加
-                        goodsId:goods.id,
-                        goodsName:goods.name,
-                        smallImage:goods.small_image,
-                        goodsPrice:goods.price
-                    });
-                }
-                Toast({
-                    message:"添加购物车成功！",
-                    duration:800
-                });
-            })
+
 
         },
         methods:{
@@ -128,12 +108,9 @@
                     this.categoriesDetailData = rightRes.data.cate;
                     // console.log(this.categoriesDetailData);
                 }
-
             }
         },
-        beforeDestroy() {
-            PubSub.unsubscribe("categoryAddToCart");
-        }
+
     }
 </script>
 
