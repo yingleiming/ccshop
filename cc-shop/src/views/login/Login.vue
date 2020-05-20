@@ -127,7 +127,7 @@
                 //3.1判断登陆模式
                 if(this.loginMode){//手机验证码登陆
                     //3.1.1输入数据校验
-                    if(!this.phone.trim()){
+                    if(!this.phone){
                         Toast({
                             message:"请输入手机号码",
                             duration:500
@@ -140,8 +140,7 @@
                         });
                         return;
                     }
-
-                    if(!this.code.trim()){
+                    if(!this.code){
                         Toast({
                             message:"请输入验证码",
                             duration:500
@@ -156,16 +155,17 @@
                     }
 
                     //3.1.2手机验证码登陆
-                    let result = await phoneCodeLogin(this.phone,this.code);
-                    // console.log(result);
-                    if(result.success_code===200){
+                    let LoginResult = await phoneCodeLogin(this.phone,this.code);
+                    console.log(LoginResult);
+                    if(LoginResult.success_code === 200){
                         //4.1保存用户信息
-                        this.syncUserInfo(result.data);
+                        this.syncUserInfo(LoginResult.data);
                         //4.2回到主面板
                         this.$router.back();
                     }else {
+                        //TODO:暂时先这样做 有时候登陆失败
                         Toast({
-                            message:"登陆失败，手机号码或验证码不正确！",
+                            message:LoginResult.message,
                             duration:500
                         });
                     }
@@ -194,7 +194,7 @@
                     //3.2.1 发起请求
                     let result = await pwdLogin(this.user_name,this.pwd,this.captcha);
                     // console.log(result);
-                    if(result.success_code===200){
+                    if(result.success_code == 200){
                         //4.1保存用户信息
                         this.syncUserInfo(result.data);
                         //4.2回到主面板
