@@ -57,27 +57,39 @@
 </template>
 
 <script>
-    import {mapMutations} from "vuex"
+    import {mapMutations,mapState} from "vuex"
     import {Toast} from "vant"
+    import {addGoodsToCart} from "./../../../service/api/index"
     export default {
         name: "ProductItem",
         props:{
             products:Array
         },
+        computed:{
+            ...mapState(["userInfo"])
+        },
         methods:{
             ...mapMutations(["ADD_GOODS"]),
-            addToCart(goods){
-                this.ADD_GOODS=({
-                    //追加
-                    goodsId:goods.id,
-                    goodsName:goods.name,
-                    smallImage:goods.small_image,
-                    goodsPrice:goods.price
-                });
-                Toast({
-                    message:"添加购物车成功！",
-                    duration:800
-                });
+            async addToCart(goods){
+                if(this.userInfo.token){//已经登陆
+                    let result =await addGoodsToCart(this.userInfo.token,goods.id,goods.name,goods.price,goods.small_image);
+                    console.log(result);
+                    if (result.success_code === 200){
+                        this.ADD_GOODS({
+                            //追加
+                            goodsId:goods.id,
+                            goodsName:goods.name,
+                            smallImage:goods.small_image,
+                            goodsPrice:goods.price
+                        });
+                        Toast({
+                            message:"添加购物车成功！",
+                            duration:800
+                        });
+                    }
+                }else {
+                    this.$router.push('/login');
+                }
             }
         },
     }

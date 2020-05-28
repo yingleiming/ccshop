@@ -115,7 +115,7 @@
             //实现商品添加的方法-添加商品到购物车方法 异步
             async dealAddGoods(goods){
                 //调用添加到购物车的接口
-               let result = await addGoodsToCart(goods.id, goods.name, goods.price, goods.small_image,);
+               let result = await addGoodsToCart(this.userInfo.token,goods.id, goods.name, goods.price, goods.small_image,);
                 console.log(result);
                 if(result.success_code === 200){
                     //同步本地数据

@@ -43,6 +43,9 @@
     import BScroll from 'better-scroll'
     //3.引入接口
     import {getCategories,getCategoriesDetail} from "./../../service/api/index"
+    // 4. 引入通知插件
+    import PubSub from 'pubsub-js';
+    import { Toast } from 'vant';
     export default {
         name: "Category",
         data(){
