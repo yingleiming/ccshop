@@ -44,6 +44,7 @@
 
 <script>
     import {mapState,mapMutations,mapActions} from "vuex"
+    import {getGoodsCart} from "./../../service/api/index"
     export default {
         name: "DashBoard",
         data() {
@@ -54,10 +55,6 @@
                     inactive: 'https://img.yzcdn.cn/vant/user-inactive.png'
                 }
             }
-        },
-        methods:{
-            ...mapMutations(["INIT_SHOP_CART"]),
-            ...mapActions(["reqUserInfo"]),
         },
         // 监视
         watch:{
@@ -71,7 +68,7 @@
         //计算属性----从vuex中获取的所有数据都放到computed里面
         computed:{
             //取数据
-            ...mapState(["shopCart"]),
+            ...mapState(["shopCart","userInfo"]),
             goodsNum(){
                 if(this.shopCart){
                     //总的购物车商品数量
@@ -86,6 +83,22 @@
                 }
             }
         },
+        methods:{
+            ...mapMutations(["INIT_SHOP_CART"]),
+            ...mapActions(["reqUserInfo"]),
+            async initShopCart(){
+                if(this.userInfo.token){//当前用户已经登陆
+                    //1.获取当前用户购物车中得商品（服务器端）
+                    let result = await getGoodsCart(this.userInfo.token);
+                    console.log(result);
+                    //2.如果成功
+                    if(result.success_code === 200){
+                        // this.INIT_SHOP_CART();
+                    }
+
+                }
+            }
+        },
         mounted(){//此钩子，是页面初始化完毕后调用
 
             //1.自动登陆
@@ -94,6 +107,7 @@
             //2.获取购物车的数据
             this.INIT_SHOP_CART();
 
+            this.initShopCart();
         },
 
     }
