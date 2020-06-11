@@ -45,6 +45,7 @@
 <script>
     import {mapState,mapMutations,mapActions} from "vuex"
     import {getGoodsCart} from "./../../service/api/index"
+    import {setStore} from "../../config/global";
     export default {
         name: "DashBoard",
         data() {
@@ -94,6 +95,22 @@
                     //2.如果成功
                     if(result.success_code === 200){
                         // this.INIT_SHOP_CART();
+                        let cartArr = result.data;
+                        let shopCart = {};
+                        //2.1 遍历
+                        cartArr.forEach((value)=>{
+                            shopCart[value.goods_id] = {
+                                "num":value.num,
+                                "id":value.goods_id,
+                                "name":value.goods_name,
+                                "small_image":value.small_image,
+                                "price":value.goods_price,
+                                "checked":true
+                            }
+                        });
+                        //2.2 本地数据同步
+                        setStore({'shopCart':shopCart});//先存储到本地
+                        this.initShopCart();
                     }
 
                 }
