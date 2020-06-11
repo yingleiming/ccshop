@@ -94,7 +94,6 @@
                     console.log(result);
                     //2.如果成功
                     if(result.success_code === 200){
-                        // this.INIT_SHOP_CART();
                         let cartArr = result.data;
                         let shopCart = {};
                         //2.1 遍历
@@ -110,7 +109,7 @@
                         });
                         //2.2 本地数据同步
                         setStore({'shopCart':shopCart});//先存储到本地
-                        this.initShopCart();
+                        this.INIT_SHOP_CART();
                     }
 
                 }

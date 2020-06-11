@@ -62,8 +62,9 @@
 
 <script>
     import {mapState,mapMutations} from "vuex";
-    import { Dialog } from 'vant';
+    import { Dialog,Toast} from 'vant';
     import SelectedLogin from './../../views/login/SelectedLogin';
+    import {changeCartNum,clearAllCart} from './../../service/api/index';
     export default {
         name: "Cart",
         components:{
@@ -105,28 +106,59 @@
         methods:{
             ...mapMutations(["REDUCE_CART","ADD_GOODS","SELECTED_SINGLE_GOODS","SELECTED_ALL_GOODS","CLEAR_CART"]),
             //1.移出购物车
-            removeOutCart(goodsId,goodsNum){
-                if(goodsNum>1){
-                    this.REDUCE_CART({goodsId});
-                }else if(goodsNum===1){//挽留
+            async removeOutCart(goodsId,goodsNum){
+                if(goodsNum > 1){
+                    let result = await changeCartNum(this.userInfo.token,goodsId,"reduce"); //调用服务器端
+                    console.log(result);
+                    if(result.success_code === 200){
+                        //修改成功
+                        this.REDUCE_CART({goodsId});
+                    }else{
+                        Toast({
+                            message : "出了点小问题呦~",
+                            duration : 500
+                        });
+                    }
+                }else if(goodsNum===1){ //挽留
                     Dialog.confirm({
                         title: '温馨提示',
                         message: '确定要删除该商品吗？'
-                    }).then(() => {//点击了确定
-                        this.REDUCE_CART({goodsId});
+                    }).then(async () => {//点击了确定
+                        let result = await changeCartNum(this.userInfo.token,goodsId,"reduce"); //调用服务器端
+                        console.log(result);
+                        if(result.success_code === 200){
+                            //修改成功
+                            this.REDUCE_CART({goodsId});
+                        }else {
+                            Toast({
+                                message : "出了点小问题呦~",
+                                duration : 500
+                            });
+                        }
                     }).catch(() => {//点击了取消
                         // do nothing
                     });
                 }
             },
             //2.增加商品
-            addToCart(goodsId,goodsName,smallImage,goodsPrice){
-                this.ADD_GOODS({
-                    goodsId,
-                    goodsName,
-                    smallImage,
-                    goodsPrice
-                })
+            async addToCart(goodsId,goodsName,smallImage,goodsPrice){
+                let result = await changeCartNum(this.userInfo.token,goodsId,"add"); //调用服务器端
+                console.log(result);
+                if(result.success_code === 200){
+                    //添加成功 本地数据处理
+                    this.ADD_GOODS({
+                        goodsId,
+                        goodsName,
+                        smallImage,
+                        goodsPrice
+                    });
+                }else{
+                    Toast({
+                        message : "出了点小问题呦~",
+                        duration : 500
+                    });
+                }
+
             },
             //3.单个商品的选中和取消选中
             singleGoodsSelected(goodsId){
@@ -138,11 +170,21 @@
             },
             //5.清空购物车
             clearCart(){
+
                 Dialog.confirm({
                     title: '温馨提示',
                     message: '确定要清除购物车吗？'
-                }).then(() => {//点击了确定
-                    this.CLEAR_CART();
+                }).then(async () => {//点击了确定
+                    let result = await clearAllCart(this.userInfo.token); //调用服务器端
+                    console.log(result);
+                    if(result.success_code === 200){ //删除成功
+                        this.CLEAR_CART();
+                    }else{
+                        Toast({
+                            message : "出了点小问题呦~",
+                            duration : 500
+                        });
+                    }
                 }).catch(() => {//点击了取消
                     // do nothing
                 });
