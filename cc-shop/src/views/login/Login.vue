@@ -194,7 +194,7 @@
                     //3.2.1 发起请求
                     let result = await pwdLogin(this.user_name,this.pwd,this.captcha);
                     // console.log(result);
-                    if(result.success_code == 200){
+                    if(result.success_code === 200){
                         //4.1保存用户信息
                         this.syncUserInfo(result.data);
                         //4.2回到主面板
@@ -205,7 +205,6 @@
                             duration:500
                         });
                     }
-
                 }
             },
             //4.处理密码的显示

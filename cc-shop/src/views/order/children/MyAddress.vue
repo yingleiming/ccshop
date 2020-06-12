@@ -25,32 +25,36 @@
 
 <script>
     import { Toast } from 'vant';
+    import {getUserAddress} from  './../../../service/api/index';
+    import {mapState} from 'vuex';
+    import PubSub from "pubsub-js"
     export default {
         name: "MyAddress",
         data() {
             return {
                 chosenAddressId: '1',
-                list: [
-                    {
-                        id: '1',
-                        name: '张三',
-                        tel: '13000000000',
-                        address: '浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室'
-                    },
-                    {
-                        id: '2',
-                        name: '李四',
-                        tel: '1310000000',
-                        address: '浙江省杭州市拱墅区莫干山路 50 号'
-                    }
-                ],
+                list: [],
             }
+        },
+        computed:{ //计算属性
+            ...mapState(["userInfo"])
+        },
+        mounted(){
+            this.initUserAddress();
+            //订阅 添加地址成功
+            PubSub.subscribe('addAddressSuccess',(msg)=>{
+
+                if(msg === "addAddressSuccess"){
+                    this.initUserAddress();
+                }
+            });
         },
         methods:{
             //点击了左边
             onClickLeft(){
                 this.$router.go(-1);
             },
+            //新增地址
             onAdd() {
                 // Toast('新增地址');
                 this.$router.push({
@@ -62,9 +66,50 @@
                 this.$router.push({
                     path:"/confirmOrder/myAddress/editAddress"
                 })
+            },
+            // 获取当前用户的地址
+            async initUserAddress(){
+                if(this.userInfo.token){ // 处于登陆状态
+                    //发起网络请求
+                    let result = await getUserAddress(this.userInfo.token);
+                    console.log(result);
+                    if(result.success_code === 200){
+                        //获取地址成功
+                        let addressArr = result.data;
+                        //先清空
+                        this.list = [];
+                        addressArr.forEach((address,index)=>{
+                            let addObj = {
+                                id : String(index+1),
+                                name : address.address_name,
+                                tel : address.address_phone,
+                                address : address.address_area + address.address_area_detail,
+                                address_id : address.address_id,
+                                user_id : address.user_id,
+                            };
+                            this.list.push(addObj);
+                        });
+                    }else {
+                        Toast({
+                            message : "地址更新失败！",
+                            duration : 500
+                        });
+                    }
+
+                }else{
+                    Toast({
+                        message : "登陆已过期,请退出登陆！",
+                        duration : 500
+                    });
+                }
             }
+        },
+        beforeDestroy(){
+            //销毁
+            PubSub.unsubcribe('addAddressSuccess');
         }
     }
+
 </script>
 
 <style scoped>

@@ -24,21 +24,52 @@
 
 <script>
     import { Toast } from 'vant';
+    import areaList from './../../../../config/area';
+    import { addUserAddress } from './../../../../service/api/index';
+    import { mapState } from "vuex";
+    import PubSub from "pubsub-js"; //引入通知
     export default {
         name: "AddAddress",
         data() {
             return {
-                areaList:{},
-                searchResult: []
+                areaList:areaList,
+                searchResult : []
             }
+        },
+        computed:{ //取数据
+            ...mapState(["userInfo"])
         },
         methods:{
             //点击了左边
             onClickLeft(){
                 this.$router.go(-1);
             },
-            onSave() {
-                Toast('save');
+            async onSave(content) { // content 弹出框插件提供
+                if(this.userInfo.token){
+                    // console.log(this.userInfo.token);
+                    let result = await addUserAddress(this.userInfo.token,content.name,content.tel,content.province + content.city + content.county,content.addressDetail,content.postalCode,content.isDefault,content.province,content.city,content.county,content.areaCode);
+                    console.log(result);
+                    // 判断
+                    if(result.success_code === 200){
+                        Toast({
+                            message : "添加地址成功！",
+                            duration : 500
+                        });
+                        this.$router.back();
+                        //发起通知
+                        PubSub.publish('addAddressSuccess');
+                    }else {
+                        Toast({
+                            message : "添加地址失败",
+                            duration : 500
+                        });
+                    }
+                }else {
+                    Toast({
+                        message : "error",
+                        duration : 500
+                    });
+                }
             },
             onChangeDetail(val) {
                 if (val) {
