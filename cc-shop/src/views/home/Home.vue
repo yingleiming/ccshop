@@ -94,7 +94,7 @@
             ...mapMutations(["ADD_GOODS"]),//调用ADD_GOODS方法
             async reqData(){
                  let res = await getHomeData();
-                console.log(res);
+                // console.log(res);
                 if(res.success){
                      this.sowing_list = res.data.list[0].icon_list;
                      this.nav_list = res.data.list[2].icon_list;

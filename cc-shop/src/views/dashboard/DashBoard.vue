@@ -91,7 +91,7 @@
                 if(this.userInfo.token){//当前用户已经登陆
                     //1.获取当前用户购物车中得商品（服务器端）
                     let result = await getGoodsCart(this.userInfo.token);
-                    console.log(result);
+                    // console.log(result);
                     //2.如果成功
                     if(result.success_code === 200){
                         let cartArr = result.data;

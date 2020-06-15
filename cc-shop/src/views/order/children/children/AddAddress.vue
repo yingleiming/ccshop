@@ -11,7 +11,6 @@
             :area-list="areaList"
             show-postal
             show-set-default
-            show-search-result
             :search-result="searchResult"
             :area-columns-placeholder="['请选择', '请选择', '请选择']"
             @save="onSave"
@@ -46,9 +45,7 @@
             },
             async onSave(content) { // content 弹出框插件提供
                 if(this.userInfo.token){
-                    // console.log(this.userInfo.token);
                     let result = await addUserAddress(this.userInfo.token,content.name,content.tel,content.province + content.city + content.county,content.addressDetail,content.postalCode,content.isDefault,content.province,content.city,content.county,content.areaCode);
-                    console.log(result);
                     // 判断
                     if(result.success_code === 200){
                         Toast({
@@ -58,6 +55,7 @@
                         this.$router.back();
                         //发起通知
                         PubSub.publish('addAddressSuccess');
+
                     }else {
                         Toast({
                             message : "添加地址失败",

@@ -42,9 +42,10 @@
         mounted(){
             this.initUserAddress();
             //订阅 添加地址成功
-            PubSub.subscribe('addAddressSuccess',(msg)=>{
-
+            PubSub.subscribe('addAddressSuccess',(msg,content)=>{
                 if(msg === "addAddressSuccess"){
+                    console.log(content);
+                    console.log(msg);
                     this.initUserAddress();
                 }
             });
@@ -72,26 +73,29 @@
                 if(this.userInfo.token){ // 处于登陆状态
                     //发起网络请求
                     let result = await getUserAddress(this.userInfo.token);
-                    console.log(result);
+                    // console.log(result);
                     if(result.success_code === 200){
                         //获取地址成功
                         let addressArr = result.data;
+                        console.log(addressArr);
                         //先清空
                         this.list = [];
                         addressArr.forEach((address,index)=>{
-                            let addObj = {
+                            let addressObj = {
                                 id : String(index+1),
                                 name : address.address_name,
                                 tel : address.address_phone,
                                 address : address.address_area + address.address_area_detail,
-                                address_id : address.address_id,
+                                address_id : address._id,
                                 user_id : address.user_id,
                             };
-                            this.list.push(addObj);
+                            this.list.push(addressObj);
+
+                            console.log(this.list);
                         });
                     }else {
                         Toast({
-                            message : "地址更新失败！",
+                            message : "获取地址失败！",
                             duration : 500
                         });
                     }
@@ -106,7 +110,7 @@
         },
         beforeDestroy(){
             //销毁
-            PubSub.unsubcribe('addAddressSuccess');
+            PubSub.unsubscribe('addAddressSuccess');
         }
     }
 
