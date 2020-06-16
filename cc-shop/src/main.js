@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
-import FastClick from "fastclick"
 import router from "./router/index"
 import store from "./store/index"
 
 //1.引用FastClick
+import FastClick from "fastclick"
 if ('addEventListener' in document) {
   document.addEventListener('DOMContentLoaded', function() {
     FastClick.attach(document.body);

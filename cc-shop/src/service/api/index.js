@@ -62,11 +62,10 @@ export const getUserAddress = (user_id) => ajax(LOCAL_BASE_URL+ '/api/address/se
 export const addUserAddress = (user_id, address_name,address_phone,address_area,address_area_detail,address_post_code,address_tag,province,city,county,areaCode)=>ajax(LOCAL_BASE_URL + '/api/address/add', {user_id, address_name,address_phone,address_area,address_area_detail,address_post_code,address_tag,province,city,county,areaCode}, 'POST');
 
 // 4.3 编辑用户的地址
-export const changeUserAddress = (address_id,user_id, address_name,address_phone,address_area,address_area_detail,address_post_code,address_tag,province,city,county,areaCode)=>ajax(LOCAL_BASE_URL + '/api/address/add', {address_id,user_id, address_name,address_phone,address_area,address_area_detail,address_post_code,address_tag,province,city,county,areaCode}, 'POST');
+export const changeUserAddress = (address_id,user_id, address_name,address_phone,address_area,address_area_detail,address_post_code,address_tag,province,city,county,areaCode)=>ajax(LOCAL_BASE_URL + '/api/address/edit', {address_id,user_id, address_name,address_phone,address_area,address_area_detail,address_post_code,address_tag,province,city,county,areaCode}, 'POST');
 
 // 4.4 删除用户的地址
 export const delUserAddress = (address_id) => ajax(LOCAL_BASE_URL+ '/api/address/del/'+ address_id);
-
 
 // 4.5 获取单条地址
 export const getCurrentUserAddress = (address_id,user_id)=>ajax(LOCAL_BASE_URL + '/api/address/one', {address_id,user_id}, 'POST');

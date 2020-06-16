@@ -26,11 +26,12 @@
 
 <script>
     import { Toast } from 'vant';
+    import areaList from "./../../../../config/area"
     export default {
         name: "EditAddress",
         data() {
             return {
-                areaList:{},
+                areaList:areaList,
                 searchResult: []
             }
         },
@@ -39,7 +40,13 @@
             onClickLeft(){
                 this.$router.go(-1);
             },
-            onSave() {
+            onSave(content) {
+
+                console.log(content);
+
+
+
+
                 Toast('save');
             },
             onDelete() {

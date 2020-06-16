@@ -65,7 +65,7 @@
             onClickLeft(){
                 this.$router.back();
             },
-            //选择收获地址
+            //选择地址
             chooseAddress(){
                 this.$router.push("/confirmOrder/MyAddress")
             },
