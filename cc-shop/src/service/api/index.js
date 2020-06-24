@@ -28,7 +28,6 @@ export const getUserInfo = ()=>ajax(LOCAL_BASE_URL+"/api/userinfo");
 //2.5 退出登陆
 export const getLogOut = ()=>ajax(LOCAL_BASE_URL+"/api/logout");
 
-
 //3.购物车接口
 export const addGoodsToCart = (user_id,goods_id,goods_name,goods_price,small_image)=>ajax(LOCAL_BASE_URL + "/api/cart/add",{user_id,goods_id,goods_name,goods_price,small_image},"POST");
 

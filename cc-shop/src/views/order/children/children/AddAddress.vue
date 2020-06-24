@@ -57,7 +57,7 @@
                         });
                         // 回去
                         this.$router.back();
-                        // 发起通知
+                        // 发出通知
                         PubSub.publish('backToMyAddress');
                     }else {
                         Toast({

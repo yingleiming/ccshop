@@ -61,8 +61,6 @@
                 })
             },
             onEdit(item, index) {
-                // Toast('编辑地址:' + index);
-                // console.log(item);
                 this.$router.push({
                     path: '/confirmOrder/myAddress/editAddress?address_id='+item.address_id
                 })
@@ -72,7 +70,7 @@
             async initUserAddress(){
                 if(this.userInfo.token){ // 处于登录状态
                     let result = await getUserAddress(this.userInfo.token);
-                    console.log(result);
+                    // console.log(result);
                     if(result.success_code === 200){
                         let addressArr = result.data;
                         this.list = [];
@@ -104,7 +102,7 @@
 
             // 返回选中的地址
             onBackAddress(item, index){
-                // console.log(item, index);
+                alert("ssss")
                 if(item){
                     // 发布地址数据
                     PubSub.publish('userAddress', item);
