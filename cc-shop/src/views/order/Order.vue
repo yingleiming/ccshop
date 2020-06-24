@@ -18,12 +18,14 @@
 
         <van-cell-group style="margin-top: 0.6rem">
             <van-cell title="送达时间" :value="arriveDate" is-link @click="showDataPopup"></van-cell>
-            <van-cell :value=" `共${goodsCount}件` " is-link :center=true>
-                <!-- 使用 title 插槽来自定义标题 -->
-                <template slot="title">
-                    <img v-for="(goods,index) in threeShopCart" :src="goods.small_image" :key="index" width="30px" />
-                </template>
-            </van-cell>
+            <router-link :to="{ path:'/confirmOrder/OrderDetail'}">
+                <van-cell :value=" `共${goodsCount}件` " is-link :center=true>
+                    <!-- 使用 title 插槽来自定义标题 -->
+                    <template slot="title">
+                        <img v-for="(goods,index) in threeShopCart" :src="goods.small_image" :key="index" width="30px" />
+                    </template>
+                </van-cell>
+            </router-link>
         </van-cell-group>
 
         <van-cell-group style="margin-top: 0.6rem">
