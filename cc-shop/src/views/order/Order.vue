@@ -17,7 +17,7 @@
         ></van-contact-card>
 
         <van-cell-group style="margin-top: 0.6rem">
-            <van-cell title="送达时间" value="请选择送达时间" is-link></van-cell>
+            <van-cell title="送达时间" :value=arriveDate is-link @click="showDataPopup"></van-cell>
             <van-cell value="内容" is-link :center=true>
                 <!-- 使用 title 插槽来自定义标题 -->
                 <template slot="title">
@@ -50,6 +50,22 @@
             @submit="onSubmit"
         ></van-submit-bar>
 
+        <!--弹出日期组件-->
+        <van-popup
+            v-model="dataShow"
+            round
+            position="bottom"
+        >
+            <van-datetime-picker
+                v-model="currentDate"
+                type="date"
+                :min-date="minDate"
+                :max-date="maxDate"
+                @cancel="onDateCancel"
+                @confirm="onDateConfirm"
+            ></van-datetime-picker>
+        </van-popup>
+
         <transition name="router-slide" mode="out-in">
             <router-view></router-view>
         </transition>
@@ -58,8 +74,22 @@
 </template>
 
 <script>
+    import Monment from "moment";
     export default {
         name: "Order",
+        data(){
+            return {
+                //1.地址  后续再做
+
+
+                //2.日期
+                dataShow:false,
+                minDate: new Date(),
+                maxDate: new Date(2020, 10, 1),
+                currentDate: new Date(),
+                arriveDate:"请选择送达时间"
+            }
+        },
         methods:{
             //点击了左边
             onClickLeft(){
@@ -71,6 +101,19 @@
             },
             onSubmit(){
                 alert(0);
+            },
+            //展示日期组件
+            showDataPopup(){
+                this.dataShow = true
+            },
+            //取消日期组件
+            onDateCancel(){
+                this.dataShow = false
+            },
+            //确认日期组件
+            onDateConfirm(val){
+                this.dataShow = false;
+                this.arriveDate = Monment(val).format('YYYY-MM-DD hh:mm');
             }
         }
     }
