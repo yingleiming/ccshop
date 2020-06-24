@@ -101,6 +101,7 @@ export default {
         });
         //5.1同步数据
         state.shopCart = {...shopCart};
+        setStore("shopCart", state.shopCart);
     },
 
     //6.清空购物车

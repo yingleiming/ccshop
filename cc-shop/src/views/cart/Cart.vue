@@ -64,7 +64,7 @@
     import {mapState,mapMutations} from "vuex";
     import { Dialog,Toast} from 'vant';
     import SelectedLogin from './../../views/login/SelectedLogin';
-    import {changeCartNum,clearAllCart} from './../../service/api/index';
+    import {changeCartNum,clearAllCart,singerGoodsSelect,allGoodsSelect} from './../../service/api/index';
     export default {
         name: "Cart",
         components:{
@@ -161,16 +161,23 @@
 
             },
             //3.单个商品的选中和取消选中
-            singleGoodsSelected(goodsId){
-                this.SELECTED_SINGLE_GOODS({goodsId});
+            async singleGoodsSelected(goodsId){
+                let result = await singerGoodsSelect(this.userInfo.token,goodsId);
+                if(result.success_code === 200){
+                    this.SELECTED_SINGLE_GOODS({goodsId});
+                }
+
             },
             //4.全选和取消全选
-            selectedAll(isSelected){
-                this.SELECTED_ALL_GOODS({isSelected});
+            async selectedAll(isSelected){
+
+                let result = await allGoodsSelect(this.userInfo.token,isSelected);
+                if(result.success_code === 200){
+                    this.SELECTED_ALL_GOODS({isSelected});
+                }
             },
             //5.清空购物车
             clearCart(){
-
                 Dialog.confirm({
                     title: '温馨提示',
                     message: '确定要清除购物车吗？'
