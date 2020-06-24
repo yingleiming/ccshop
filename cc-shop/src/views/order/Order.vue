@@ -17,13 +17,11 @@
         ></van-contact-card>
 
         <van-cell-group style="margin-top: 0.6rem">
-            <van-cell title="送达时间" :value=arriveDate is-link @click="showDataPopup"></van-cell>
-            <van-cell value="内容" is-link :center=true>
+            <van-cell title="送达时间" :value="arriveDate" is-link @click="showDataPopup"></van-cell>
+            <van-cell :value=" `共${goodsCount}件` " is-link :center=true>
                 <!-- 使用 title 插槽来自定义标题 -->
                 <template slot="title">
-                    <img src="./images/detail1.jpg" alt="" width="30px">
-                    <img src="./images/detail1.jpg" alt="" width="30px">
-                    <img src="./images/detail1.jpg" alt="" width="30px">
+                    <img v-for="(goods,index) in threeShopCart" :src="goods.small_image" :key="index" width="30px" />
                 </template>
             </van-cell>
         </van-cell-group>
@@ -75,6 +73,7 @@
 
 <script>
     import Monment from "moment";
+    import { mapState } from "vuex"
     export default {
         name: "Order",
         data(){
@@ -88,6 +87,39 @@
                 maxDate: new Date(2020, 10, 1),
                 currentDate: new Date(),
                 arriveDate:"请选择送达时间"
+            }
+        },
+        computed:{
+            ...mapState(["shopCart","userInfo"]),//取数据
+            //1.商品总件数
+            goodsCount(){
+                let selectedGoodsCount = 0;
+                Object.values(this.shopCart).forEach((goods,index)=>{
+                    if(goods.checked){
+                        selectedGoodsCount += 1;
+                    }
+                });
+                return selectedGoodsCount;
+            },
+            //2.商品总价
+            totalPrice(){
+                let totalPrice = 0;
+                Object.values(this.shopCart).forEach((goods,index)=>{
+                    if(goods.checked){
+                        totalPrice += goods.num*goods.price;
+                    }
+                });
+                return totalPrice;
+            },
+            //3.取出选中的前三件商品
+            threeShopCart(){
+                let shopCart = [];
+                Object.values(this.shopCart).forEach((goods,index)=>{
+                    if(goods.checked){
+                        shopCart.push(goods);
+                    }
+                });
+                return shopCart.slice(0,3);
             }
         },
         methods:{
@@ -114,7 +146,8 @@
             onDateConfirm(val){
                 this.dataShow = false;
                 this.arriveDate = Monment(val).format('YYYY-MM-DD hh:mm');
-            }
+            },
+
         }
     }
 </script>
