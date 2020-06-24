@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="tabBarRight">
-                    <router-link tag="a" class="pay" :to="{path:'/confirmOrder'}">去结算({{goodsCount}})</router-link>
+                    <a class="pay" @click="toPay">去结算({{goodsCount}})</a>
                 </div>
             </div>
         </div>
@@ -195,6 +195,18 @@
                 }).catch(() => {//点击了取消
                     // do nothing
                 });
+            },
+            //6.去支付
+            toPay(){
+                //边控
+                if(this.totalPrice>0){
+                    this.$router.push("/confirmOrder")
+                }else {
+                    Toast({
+                        message :"请先选择商品后再结算",
+                        duration : 1000
+                    });
+                }
             }
         }
     }
