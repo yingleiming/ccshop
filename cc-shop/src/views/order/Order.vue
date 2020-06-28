@@ -74,13 +74,15 @@
 <script>
     import Monment from "moment";
     import { mapState } from "vuex"
+    import { Toast } from "vant"
+    import { postOrder,createOrderSuccess,getWXCode,queryPayStatus,getAllSelectedGoods } from "./../../service/api/index"
     export default {
         name: "Order",
         data(){
             return {
                 //1.地址  后续再做
 
-
+                address_id: null,
                 //2.日期
                 dataShow:false,
                 minDate: new Date(),
@@ -135,26 +137,69 @@
             }
         },
         methods:{
-            //点击了左边
+            // 1.点击了左边
             onClickLeft(){
                 this.$router.back();
             },
-            //选择地址
+            // 2.选择地址
             chooseAddress(){
                 this.$router.push("/confirmOrder/MyAddress")
             },
-            onSubmit(){
-                alert(0);
+            // 3.提交订单
+            async onSubmit(){
+                //3.1数据验证
+                // if(!this.address_id){
+                //     Toast({
+                //         message :"请选择收货地址",
+                //         duration : 500
+                //     });
+                //     return;
+                // }
+
+                if(this.arriveDate === "请选择送达时间"){
+                    Toast({
+                        message :"请选择送达时间",
+                        duration : 500
+                    });
+                    return;
+                }
+
+                if(!this.notice){
+                    Toast({
+                        message :"请添加注意事项",
+                        duration : 500
+                    });
+                    return;
+                }
+                //3.2处理订单相关
+                if(this.userInfo.token){
+                    //3.2.1查询所有已经被选中的商品
+                    let goodsResult = await getAllSelectedGoods(this.userInfo.token);
+                    // console.log(goodsResult);
+                    //3.2.2创建订单
+                    if(goodsResult.success_code === 200){
+                        let orderResult = await postOrder(this.userInfo.token, this.address_id, this.arriveDate, goodsResult.data, this.notice, this.totalPrice, this.disPrice)
+                        console.log(orderResult);
+                        //3.2.3删除已经生成订单的商品 delAllSelectedGoods
+
+                    }else{
+                        Toast({
+                            message :"获取订单商品失败",
+                            duration : 500
+                        });
+                    }
+                }
+
             },
-            //展示日期组件
+            // 4.展示日期组件
             showDataPopup(){
                 this.dataShow = true
             },
-            //取消日期组件
+            // 5.取消日期组件
             onDateCancel(){
                 this.dataShow = false
             },
-            //确认日期组件
+            // 6.确认日期组件
             onDateConfirm(val){
                 this.dataShow = false;
                 this.arriveDate = Monment(val).format('YYYY-MM-DD hh:mm');

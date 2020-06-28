@@ -93,7 +93,15 @@ export const getOrder = (user_id, status)=>ajax(LOCAL_BASE_URL + '/api/order/get
 
 
 
+//微信支付接口部署
+const PAY_URL = "http://47.98.157.152/WXPayProject/pay";
+// 6.1 获取支付的url地址
+export const getWXCode = (outTradeNo,totalFee) => ajax(PAY_URL+ '/createNative.do'+ {outTradeNo,totalFee}
+);
 
+// 6.2 查询是否支付成功
+export const queryPayStatus = (out_trade_no) => ajax(PAY_URL+ '/queryPayStatus.do'+ {out_trade_no}
+);
 
 
 
