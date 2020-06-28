@@ -102,7 +102,7 @@
 
             // 返回选中的地址
             onBackAddress(item, index){
-                alert("ssss")
+                console.log(item, index);
                 if(item){
                     // 发布地址数据
                     PubSub.publish('userAddress', item);

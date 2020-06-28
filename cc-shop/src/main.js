@@ -23,6 +23,9 @@ import "./config/rem.js"
 //5.引入过滤器
 import "./config/filters"
 
+//6.引入二维码生成器插件
+import VueQriously from 'vue-qriously'
+Vue.use(VueQriously)
 
 new Vue({
   router,

@@ -10,7 +10,9 @@
 
         <!--收货地址-->
         <van-contact-card
-            type="add"
+            :type="address_type"
+            :name = "address_name"
+            :tel = "address_phone"
             add-text="选择收货地址"
             @click="chooseAddress()"
             style="margin-top: 3rem;"
@@ -51,18 +53,22 @@
         ></van-submit-bar>
         <!--弹出日期组件-->
         <van-popup
-            v-model="dataShow"
-            round
-            position="bottom"
+                v-model="dataShow"
+                round
+                position="bottom"
         >
             <van-datetime-picker
-                v-model="currentDate"
-                type="date"
-                :min-date="minDate"
-                :max-date="maxDate"
-                @cancel="onDateCancel"
-                @confirm="onDateConfirm"
+                    v-model="currentDate"
+                    type="date"
+                    :min-date="minDate"
+                    :max-date="maxDate"
+                    @cancel="onDateCancel"
+                    @confirm="onDateConfirm"
             ></van-datetime-picker>
+        </van-popup>
+        <!--支付二维码蒙版-->
+        <van-popup v-model="isPay" round position="center">
+            <qriously :value="qrcode" :size="200" />
         </van-popup>
 
         <transition name="router-slide" mode="out-in">
@@ -72,17 +78,20 @@
 </template>
 
 <script>
+    import PubSub from 'pubsub-js';
     import Monment from "moment";
     import { mapState } from "vuex"
     import { Toast } from "vant"
-    import { postOrder,createOrderSuccess,getWXCode,queryPayStatus,getAllSelectedGoods } from "./../../service/api/index"
+    import { postOrder,orderPaySuccess,getWXCode,queryPayStatus,getAllSelectedGoods,delAllSelectedGoods} from "./../../service/api/index"
     export default {
         name: "Order",
         data(){
             return {
                 //1.地址  后续再做
-
-                address_id: null,
+                address_type : "add",//地址卡片类型
+                address_name:null, //收货人
+                address_phone:null, //收获人联系方式
+                address_id: null,//收获人地址id
                 //2.日期
                 dataShow:false,
                 minDate: new Date(),
@@ -92,8 +101,21 @@
                 arriveDate:"请选择送达时间",
                 //4.备注
                 notice:null,
+                //5.支付二维码
+                isPay:false,//二维码蒙版
+                qrcode:null,//生成二维码url地址
 
             }
+        },
+        mounted(){
+            PubSub.subscribe("userAddress",(msg,address)=>{
+                if(msg === "userAddress"){
+                    this.address_type = "edit";
+                    this.address_name = address.name;
+                    this.address_phone = address.tel;
+                    this.address_id = address.address_id;
+                }
+            })
         },
         computed:{
             ...mapState(["shopCart","userInfo"]),//取数据
@@ -148,13 +170,13 @@
             // 3.提交订单
             async onSubmit(){
                 //3.1数据验证
-                // if(!this.address_id){
-                //     Toast({
-                //         message :"请选择收货地址",
-                //         duration : 500
-                //     });
-                //     return;
-                // }
+                if(!this.address_id){
+                    Toast({
+                        message :"请选择收货地址",
+                        duration : 500
+                    });
+                    return;
+                }
 
                 if(this.arriveDate === "请选择送达时间"){
                     Toast({
@@ -179,9 +201,50 @@
                     //3.2.2创建订单
                     if(goodsResult.success_code === 200){
                         let orderResult = await postOrder(this.userInfo.token, this.address_id, this.arriveDate, goodsResult.data, this.notice, this.totalPrice, this.disPrice)
-                        console.log(orderResult);
+                        // console.log(orderResult);
                         //3.2.3删除已经生成订单的商品 delAllSelectedGoods
+                        if(orderResult.success_code === 200){
+                            let delResult = await delAllSelectedGoods(this.userInfo.token);
+                            // console.log(delResult);
+                            //3.2.4 发起微信支付
+                            if(delResult.success_code === 200){
+                                //测试，测试，测试
+                                let urlResult = await getWXCode(orderResult.data.order_id,1);
+                                console.log(urlResult);
+                                if(urlResult.code_url){//有值
+                                    this.isPay = true;
+                                    this.qrcode = urlResult.code_url;
+                                    //3.2.5验证用户是否扫码
+                                    let payResult = await queryPayStatus(orderResult.data.order_id);
+                                    if(payResult.success){
+                                        Toast({
+                                            message :payResult.message,
+                                            duration : 1000
+                                        });
 
+                                        this.isPay = true;
+                                        //3.2.6通知自己的服务器订单支付成功
+                                        let statusResult = await orderPaySuccess(this.userInfo.token,orderResult.data.order_id);
+                                        console.log(statusResult);
+                                        if(statusResult.success_code === 200){
+                                            //3.2.7 跳转到我的
+                                            this.$router.replace("/dashboard/mine");
+                                            window.sessionStorage.setItem("tabBarActiveIndex",3)
+                                        }
+                                    }
+                                }
+                            }else {
+                                Toast({
+                                    message :"订单处理失败",
+                                    duration : 500
+                                });
+                            }
+                        }else{
+                            Toast({
+                                message :"购物车同步出现问题",
+                                duration : 500
+                            });
+                        }
                     }else{
                         Toast({
                             message :"获取订单商品失败",
@@ -205,6 +268,9 @@
                 this.arriveDate = Monment(val).format('YYYY-MM-DD hh:mm');
             },
 
+        },
+        beforeDestroy() {
+            PubSub.unsubscribe("userAddress");
         }
     }
 </script>

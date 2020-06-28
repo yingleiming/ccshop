@@ -86,7 +86,7 @@ export const getCurrentUserAddress = (address_id,user_id)=>ajax(LOCAL_BASE_URL +
 export const postOrder = (user_id, address_id, arrive_time, cart_shop, notice, shop_price, dis_price)=>ajax(LOCAL_BASE_URL + '/api/order/post', {user_id, address_id, arrive_time, cart_shop, notice, shop_price, dis_price}, 'POST');
 
 // 5.2 订单支付成功
-export const createOrderSuccess = (user_id, order_id)=>ajax(LOCAL_BASE_URL + '/api/order/change_status', {user_id, order_id}, 'POST');
+export const orderPaySuccess = (user_id, order_id)=>ajax(LOCAL_BASE_URL + '/api/order/change_status', {user_id, order_id}, 'POST');
 
 // 5.3 查询订单
 export const getOrder = (user_id, status)=>ajax(LOCAL_BASE_URL + '/api/order/get', {user_id, status}, 'POST');
@@ -94,13 +94,14 @@ export const getOrder = (user_id, status)=>ajax(LOCAL_BASE_URL + '/api/order/get
 
 
 //微信支付接口部署
-const PAY_URL = "http://47.98.157.152/WXPayProject/pay";
+// const PAY_URL = "http://47.98.157.152/WXPayProject/pay";
+const PAY_URL = "/pay";
 // 6.1 获取支付的url地址
-export const getWXCode = (outTradeNo,totalFee) => ajax(PAY_URL+ '/createNative.do'+ {outTradeNo,totalFee}
+export const getWXCode = (outTradeNo,totalFee) => ajax(PAY_URL+ '/createNative.do',{outTradeNo,totalFee}
 );
 
 // 6.2 查询是否支付成功
-export const queryPayStatus = (out_trade_no) => ajax(PAY_URL+ '/queryPayStatus.do'+ {out_trade_no}
+export const queryPayStatus = (out_trade_no) => ajax(PAY_URL+ '/queryPayStatus.do',{out_trade_no}
 );
 
 
