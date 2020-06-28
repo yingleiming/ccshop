@@ -72,3 +72,8 @@ Vue.use(Popup);
 import { DatetimePicker } from 'vant';
 
 Vue.use(DatetimePicker);
+
+//14.卡片选项
+import { Card } from 'vant';
+
+Vue.use(Card);

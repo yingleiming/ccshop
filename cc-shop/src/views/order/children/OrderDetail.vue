@@ -8,12 +8,47 @@
                 :border=true
                 @click-left="$router.go(-1)"
         ></van-nav-bar>
+        <!--内容-->
+        <van-cell-group style="margin-top: 3rem;">
+            <van-cell title="商品" :value="`共${checkedShopCount}件`"/>
+            <van-card
+                v-for="(goods) in checkedShopCart"
+                :num="goods.num"
+                :price="goods.price"
+                :key="goods.id"
+                :title="goods.name"
+                :thumb="goods.small_image"
+            ></van-card>
+        </van-cell-group>
     </div>
 </template>
 
 <script>
+    import {mapState} from "vuex"
     export default {
-        name: "OrderDetail"
+        name: "OrderDetail",
+        data(){
+            return{
+
+            }
+        },
+        computed:{
+            ...mapState(["shopCart"]),//取数据
+            //1.商品总件数
+            checkedShopCart(){
+                let shopCart = [];
+                Object.values(this.shopCart).forEach((goods,index)=>{
+                    if(goods.checked){
+                        shopCart.push(goods);
+                    }
+                });
+                return shopCart;
+            },
+            //2.获取选中的商品
+            checkedShopCount(){
+                return this.checkedShopCart.length;
+            },
+        }
     }
 </script>
 

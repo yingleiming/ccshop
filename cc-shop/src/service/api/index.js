@@ -10,6 +10,9 @@ export const getCategories = ()=>ajax(BASE_URL+"/api/homeApi/categories");
 
 export const getCategoriesDetail = (param)=>ajax(BASE_URL+"/api/homeApi/categoriesdetail" + param);
 
+
+
+
 //2.用户中心的接口
 
 const LOCAL_BASE_URL = "/api";
@@ -27,6 +30,9 @@ export const getUserInfo = ()=>ajax(LOCAL_BASE_URL+"/api/userinfo");
 
 //2.5 退出登陆
 export const getLogOut = ()=>ajax(LOCAL_BASE_URL+"/api/logout");
+
+
+
 
 //3.购物车接口
 export const addGoodsToCart = (user_id,goods_id,goods_name,goods_price,small_image)=>ajax(LOCAL_BASE_URL + "/api/cart/add",{user_id,goods_id,goods_name,goods_price,small_image},"POST");
@@ -52,6 +58,9 @@ export const getAllSelectedGoods = (user_id) => ajax(LOCAL_BASE_URL+ '/api/cart/
 // 3.8 删除已经生成订单的商品
 export const delAllSelectedGoods = (user_id) => ajax(LOCAL_BASE_URL+ '/api/cart/del_checked/'+ user_id);
 
+
+
+
 // 4. 地址接口
 
 // 4.1 获取当前用户的地址
@@ -68,3 +77,25 @@ export const delUserAddress = (address_id) => ajax(LOCAL_BASE_URL+ '/api/address
 
 // 4.5 获取单条地址
 export const getCurrentUserAddress = (address_id,user_id)=>ajax(LOCAL_BASE_URL + '/api/address/one', {address_id,user_id}, 'POST');
+
+
+
+// 5. 订单接口
+
+// 5.1 获取订单
+export const postOrder = (user_id, address_id, arrive_time, cart_shop, notice, shop_price, dis_price)=>ajax(LOCAL_BASE_URL + '/api/order/post', {user_id, address_id, arrive_time, cart_shop, notice, shop_price, dis_price}, 'POST');
+
+// 5.2 订单支付成功
+export const createOrderSuccess = (user_id, order_id)=>ajax(LOCAL_BASE_URL + '/api/order/change_status', {user_id, order_id}, 'POST');
+
+// 5.3 查询订单
+export const getOrder = (user_id, status)=>ajax(LOCAL_BASE_URL + '/api/order/get', {user_id, status}, 'POST');
+
+
+
+
+
+
+
+
+

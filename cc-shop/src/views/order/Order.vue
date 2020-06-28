@@ -15,7 +15,7 @@
             @click="chooseAddress()"
             style="margin-top: 3rem;"
         ></van-contact-card>
-
+        <!--送达时间-->
         <van-cell-group style="margin-top: 0.6rem">
             <van-cell title="送达时间" :value="arriveDate" is-link @click="showDataPopup"></van-cell>
             <router-link :to="{ path:'/confirmOrder/OrderDetail'}">
@@ -27,29 +27,28 @@
                 </van-cell>
             </router-link>
         </van-cell-group>
-
+        <!--支付方式-->
         <van-cell-group style="margin-top: 0.6rem">
             <van-cell title="支付方式" value="微信"></van-cell>
         </van-cell-group>
-
+        <!--备注-->
         <van-cell-group style="margin-top: 0.6rem">
             <van-cell title="备注">
-                <input type="text" placeholder="选填，请备注您的特殊需求"/>
+                <input type="text" style="text-align: right" placeholder="选填，请备注您的特殊需求" v-model="notice"/>
             </van-cell>
         </van-cell-group>
-
+        <!--费用-->
         <van-cell-group style="margin-top: 0.6rem">
-            <van-cell title="商品金额" value="￥50.30"></van-cell>
-            <van-cell title="配送费" value="0.00"></van-cell>
+            <van-cell title="商品金额" :value="`￥${totalPrice}`"></van-cell>
+            <van-cell title="配送费" :value="`￥${disPrice}`"></van-cell>
         </van-cell-group>
 
         <van-submit-bar
-            :price="3050"
+            :price="(totalPrice+disPrice)*100"
             button-text="提交订单"
             label="实付"
             @submit="onSubmit"
         ></van-submit-bar>
-
         <!--弹出日期组件-->
         <van-popup
             v-model="dataShow"
@@ -69,7 +68,6 @@
         <transition name="router-slide" mode="out-in">
             <router-view></router-view>
         </transition>
-
     </div>
 </template>
 
@@ -88,7 +86,11 @@
                 minDate: new Date(),
                 maxDate: new Date(2020, 10, 1),
                 currentDate: new Date(),
-                arriveDate:"请选择送达时间"
+                //3.送达时间
+                arriveDate:"请选择送达时间",
+                //4.备注
+                notice:null,
+
             }
         },
         computed:{
@@ -122,6 +124,14 @@
                     }
                 });
                 return shopCart.slice(0,3);
+            },
+            //5.配送费 >40元免配送费；<40元 配送费6元
+            disPrice(){
+                if(this.totalPrice>40){
+                    return 0;
+                }else {
+                    return 6;
+                }
             }
         },
         methods:{
