@@ -89,7 +89,7 @@ export const postOrder = (user_id, address_id, arrive_time, cart_shop, notice, s
 export const orderPaySuccess = (user_id, order_id)=>ajax(LOCAL_BASE_URL + '/api/order/change_status', {user_id, order_id}, 'POST');
 
 // 5.3 查询订单
-export const getOrder = (user_id, status)=>ajax(LOCAL_BASE_URL + '/api/order/get', {user_id, status}, 'POST');
+export const getOrder = (user_id, status)=>ajax(LOCAL_BASE_URL + '/api/order/get', {user_id, status}, 'POST'); //已支付 传 pay 未支付 will;不传 查所有
 
 
 

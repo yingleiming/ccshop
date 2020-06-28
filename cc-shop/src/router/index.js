@@ -3,12 +3,16 @@ import Router from "vue-router"
 
 //引入一级路由
 import DashBoard from "./../views/dashboard/DashBoard"
+
 //路由懒加载
 const Cart = ()=>import("./../views/cart/Cart.vue");
 const Category = ()=>import("./../views/category/Category.vue");
 const Home = ()=>import("./../views/home/Home.vue");
+
+//用户中心
 const Mine = ()=>import("./../views/mine/Mine.vue");
 const UserCenter = ()=>import("./../views/mine/children/UserCenter.vue");
+const MineOrder = ()=>import("./../views/mine/children/MineOrder.vue");
 
 //引入组件相关
 const Order = ()=>import("./../views/order/Order.vue");
@@ -39,7 +43,8 @@ export default new Router({
                     name:"mine",
                     component:Mine,
                     children:[
-                        {path:"userCenter",name:"userCenter",component:UserCenter}
+                        {path:"userCenter",name:"userCenter",component:UserCenter},//用户中心
+                        {path:"mineOrder",name:"mineOrder",component:MineOrder}//我的订单
                     ]
                 },
             ]

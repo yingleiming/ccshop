@@ -25,15 +25,25 @@
         </van-cell-group>
 
         <van-cell-group>
-            <van-cell icon="label" title="我的订单" value="查看所有的订单" is-link></van-cell>
-            <van-grid :column-num="4">
-                <van-grid-item
-                        v-for="(order,index) in orderData"
-                        :key="index"
-                        :icon="order.icon"
-                        :text="order.title"
-                ></van-grid-item>
-            </van-grid>
+            <van-cell
+                icon="label"
+                title="我的订单"
+                value="查看所有的订单"
+                @click="$router.push({path:'/dashboard/mine/mineOrder'})"
+                is-link>
+
+            </van-cell>
+            <router-link tag="div" to="{path:'/dashboard/mine/mineOrder'}">
+                <van-grid :column-num="4">
+                    <van-grid-item
+                            v-for="(order,index) in orderData"
+                            :key="index"
+                            :icon="order.icon"
+                            :text="order.title"
+                    ></van-grid-item>
+                </van-grid>
+            </router-link>
+
         </van-cell-group>
 
         <van-cell-group style="margin-top: 0.6rem;">
@@ -60,11 +70,12 @@
 
 <script>
     import SelectedLogin from './../../views/login/SelectedLogin';
+
     import {mapState} from "vuex";
     export default {
         name: "Mine",
         components:{
-            SelectedLogin
+            SelectedLogin,
         },
         data(){
             return{
