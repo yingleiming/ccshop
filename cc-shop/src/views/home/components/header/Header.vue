@@ -40,7 +40,7 @@
         },
         methods:{
             getLocation(){
-                let geolocation = new qq.maps.Geolocation("3PXBZ-DOQK6-FQISF-M2BXT-MOETT-L6FIM", "myapp");
+                let geolocation = new window.qq.maps.Geolocation("3PXBZ-DOQK6-FQISF-M2BXT-MOETT-L6FIM", "myapp");
                 geolocation.getLocation(this.showPosition, this.showError);
             },
             showPosition(position){
