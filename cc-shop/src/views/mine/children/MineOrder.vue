@@ -8,12 +8,21 @@
                 :border=true
                 @click-left="$router.go(-1)"
         ></van-nav-bar>
-        <van-tabs v-model="activeName" style="margin-top: 2.6rem;" title-active-color="#75a342" color="#75a342">
+        <van-tabs
+                v-model="activeName"
+                style="margin-top: 2.6rem;"
+                title-active-color="#75a342"
+                @click="dealWithTabClick"
+                color="#75a342">
             <van-tab title="全部" name="a">
                 <MineOrderItem v-for="(order) in allOrderArr" :order="order" :key="order._id"/>
             </van-tab>
-            <van-tab title="待支付" name="b">内容 2</van-tab>
-            <van-tab title="待收货" name="c">内容 3</van-tab>
+            <van-tab title="待支付" name="b">
+                <MineOrderItem v-for="(order) in willOrderArr" :order="order" :key="order._id"/>
+            </van-tab>
+            <van-tab title="待收货" name="c">
+                <MineOrderItem v-for="(order) in payOrderArr" :order="order" :key="order._id"/>
+            </van-tab>
         </van-tabs>
     </div>
 </template>
@@ -49,6 +58,27 @@
                 console.log(result);
                 if(result.success_code === 200){
                     this.allOrderArr = result.data;
+                }else {
+                    Toast({
+                        message :"订单获取失败",
+                        duration:600
+                    });
+                }
+            },
+            async dealWithTabClick(name,title){
+                if(name === "a"){
+                    this.allOrderArr = await this.getTabOrder();
+                }else if(name === "b"){
+                    this.willOrderArr = await this.getTabOrder("will");
+                }else if(name === "c"){
+                    this.payOrderArr = await this.getTabOrder("pay");
+                }
+            },
+            async getTabOrder(status){
+                let result = await getOrder(this.userInfo.token,status);
+                console.log(result);
+                if(result.success_code === 200){
+                    return result.data;
                 }else {
                     Toast({
                         message :"订单获取失败",
