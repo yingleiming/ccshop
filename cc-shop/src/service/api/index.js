@@ -76,7 +76,7 @@ export const changeUserAddress = (address_id,user_id, address_name,address_phone
 export const delUserAddress = (address_id) => ajax(LOCAL_BASE_URL+ '/api/address/del/'+ address_id);
 
 // 4.5 获取单条地址
-export const getCurrentUserAddress = (address_id,user_id)=>ajax(LOCAL_BASE_URL + '/api/address/one', {address_id,user_id}, 'POST');
+export const getCurrentUserAddress = (user_id,address_id)=>ajax(LOCAL_BASE_URL + '/api/address/one', {user_id,address_id}, 'POST');
 
 
 
