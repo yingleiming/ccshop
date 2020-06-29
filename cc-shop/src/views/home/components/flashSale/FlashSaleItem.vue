@@ -45,9 +45,9 @@
                 PubSub.publish("homeAddToCart",goods);
             }
         },
-        // beforeDestroy() {
-        //     PubSub.unsubscribe("homeAddToCart");
-        // }
+        beforeDestroy() {
+            PubSub.unsubscribe("homeAddToCart");
+        }
     }
 </script>
 
