@@ -169,7 +169,6 @@
                             duration:500
                         });
                     }
-
                 }else{
                     //3.2用户名和密码登陆
                     if(!this.user_name){
