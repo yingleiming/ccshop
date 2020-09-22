@@ -2,38 +2,21 @@
     <div id="dashboard">
         <van-tabbar v-model="active">
             <van-tabbar-item replace to="/dashboard/home">
-                <span>首页</span>
-                <img
-                    slot="icon"
-                    slot-scope="props"
-                    :src="props.active ? icon.active : icon.inactive"
-                >
+                <van-icon name="wap-home" size="1rem"/>
+                <span style="display: block">首页</span>
             </van-tabbar-item>
             <van-tabbar-item replace to="/dashboard/category">
-                <span>分类</span>
-                <img
-                    slot="icon"
-                    slot-scope="props"
-                    :src="props.active ? icon.active : icon.inactive"
-                >
+                <van-icon name="bars" size="1rem"/>
+                <span style="display: block">分类</span>
             </van-tabbar-item>
             <van-tabbar-item replace to="/dashboard/cart" :info="goodsNum>0?goodsNum:''">
-                <span>购物车</span>
-                <img
-                    slot="icon"
-                    slot-scope="props"
-                    :src="props.active ? icon.active : icon.inactive"
-                >
+                <van-icon name="shopping-cart" size="1rem"/>
+                <span style="display: block">购物车</span>
             </van-tabbar-item>
             <van-tabbar-item replace to="/dashboard/mine">
-                <span>我的</span>
-                <img
-                    slot="icon"
-                    slot-scope="props"
-                    :src="props.active ? icon.active : icon.inactive"
-                >
+                <van-icon name="manager" size="1rem"/>
+                <span style="display: block">我的</span>
             </van-tabbar-item>
-
         </van-tabbar>
         <keep-alive>
             <router-view v-if="$route.meta.keepAlive"/>
@@ -51,7 +34,8 @@
                 active: Number(sessionStorage.getItem("tabBarActiveIndex")) || 0,
                 icon: {
                     active: 'https://img.yzcdn.cn/vant/user-active.png',
-                    inactive: 'https://img.yzcdn.cn/vant/user-inactive.png'
+                    inactive: 'https://img.yzcdn.cn/vant/user-inactive.png',
+                    cart:'https://img.yzcdn.cn/vant/cart-active.png'
                 }
             }
         },
@@ -107,6 +91,13 @@
         background-color: transparent;
     }
     .van-tabbar--fixed{
-        /*bottom:1rem*/
+        bottom:0rem
+    }
+    .van-tabbar-item{
+        text-align: center;
+    }
+    .van-tabbar-item--active {
+        color: #1989fa;
+        //text-align: center;
     }
 </style>

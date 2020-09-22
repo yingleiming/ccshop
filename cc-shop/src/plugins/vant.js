@@ -63,3 +63,6 @@ import { Grid, GridItem } from 'vant';
 Vue.use(Grid);
 Vue.use(GridItem);
 
+//icon 图标
+import { Icon } from 'vant';
+Vue.use(Icon);
